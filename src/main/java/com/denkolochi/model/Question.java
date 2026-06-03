@@ -1,11 +1,15 @@
 package com.denkolochi.model;
 
+import java.util.List;
+
 public class Question {
 	private int id_questions;
 	private String enonce;
 	private int delai_max;
 	private int score;
 	private int id_capacite;
+
+	private List<Option> options;
 
 	public Question() {
 	}
@@ -16,6 +20,14 @@ public class Question {
 		this.delai_max = delai_max;
 		this.score = score;
 		this.id_capacite = id_capacite;
+	}
+
+		public void setOptions(List<Option> options) {
+		this.options = options;
+	}
+
+	public List<Option> getOptions() {
+	    return options;
 	}
 
 	public int getId_questions() {
