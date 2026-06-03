@@ -1,0 +1,468 @@
+@charset "UTF-8";
+
+.container{
+    border: 2px solid #2E9E3E;
+    border-radius: 15px;
+    /* padding: 10px 10px; */
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container{
+    display: flex;
+    min-height: 100vh;
+}
+ .sidebar{
+    border-right: 1px solid rgb(210, 198, 198);
+     
+ }
+ .logo_content{
+    text-align: center;
+ }
+ .logo{
+    margin-top: 20px;
+    height: 100px;
+    width: 160px;
+ }
+
+.icon{
+    display: flex;
+    align-items: center;
+}
+
+.icon_para{
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    
+}
+
+.icon_deconn{
+    display: flex;
+    align-items: center;
+    margin-top: 195px;
+    /* margin-top: 200px; */
+    /* border-top: 1px solid gray; */
+}
+
+img{
+    height: 15px;
+    width: 15px;
+}
+
+.notif{
+    height: 40px;
+    width: 40px;
+}
+
+ 
+ .menu{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+ } 
+
+
+ .menu a{
+    text-decoration: none;
+    font-family: montserrat;
+    font-weight: bold;
+    color: black;
+    font-size: 14px;
+    padding-left: 8px;
+ }
+.menu .icon_deconn a{
+    color: red;
+} 
+
+h1{
+    font-size: 24px;
+    color: #2E9E3E;
+    font-weight: bold;
+}
+
+.admin{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-right: 20px;
+
+}
+
+.profil{
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 1);
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+main{
+    flex: 1;
+}
+
+.section_ajout{
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding-left: 20px;
+}
+
+.icon_ajout{
+    height: 50px;
+    width: 50px;
+    color: white;
+    font-size: 50px;
+    font-family: monsterrat;
+    font-weight: bold;
+    background-color: #2E9E3E ;
+    border: 2px solid #1E88E5;
+    border-radius: 15px;
+    text-align: center;
+    padding-bottom: 5px;
+}
+p{
+    margin-top: -20px;
+    color: gray;
+}
+
+span{
+    color: gray;
+}
+
+.formulaire{
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 1);
+    margin: 20px;
+    border-radius: 15Px;
+    padding: 15px;
+    display: flex;
+    
+}
+.cote_gauche{
+    flex: 1;
+    padding-left: 35px;
+
+
+    /* width: 70%; */
+}
+
+.form{
+    margin-bottom: 20px;
+}
+
+.form_ligne{
+    display: flex;
+    width: 70%;
+    gap: 12px;
+    /* flex-direction: column;
+    margin-bottom: 15px;*/
+}
+.label_gauche{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+    font-size:16px;
+}
+
+.label_droite{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+    font-size:16px;
+}
+
+input,
+textarea,
+select{
+    width:70%;
+    padding:15px;
+    border:2px solid #2E9E3E ;
+    border-radius:12px;
+    font-size:13px;
+}
+
+textarea{
+    height:100px;
+    resize:none;
+}
+.form_ligne .form input{
+    width:100%;
+}
+
+.form_ligne .form select{
+    width:120%;
+    /* gap: 20px; */
+}
+
+.form_ligne_capacite{
+    margin-left: 60px;
+}
+
+.form_ligne_age{
+    margin-left: 50px;
+}
+
+#select{
+    width: 125%;
+}
+.cote_droite{
+    margin-right: 50px;
+    /* border: 2px solid #2E9E3E; */
+}
+
+.upload{
+    border: 2px dashed #2E9E3E;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.upload label{
+    font-size: 18px;
+    color: gray;
+    font-family: montserrat;
+    font-weight: bold;
+}
+.upload strong{
+    font-size: 16px;
+    color: #2E9E3E;
+    font-family: montserrat;
+    font-weight: bold;
+    /* margin-top: -50px; */
+}
+
+.image{
+    height: 70px;
+    width: 70px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#fileUpload{
+    /* display: none; */
+    border: none;
+}
+ #date_section{
+    margin-top: 70px;
+ }
+
+ #dateCreation{
+    width: 88%;
+    
+ }
+
+ .info{
+    width: 92%;
+    margin-top: 40px;
+    border: 2px solid #2E9E3E;
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 15px;
+    font-family: montserrat;
+    font-weight: bold;
+    color: #2E9E3E;
+    background-color: #D9D9D9;
+ }
+ #information{
+    height: 18px;
+    width: 18px;
+ }
+
+ .bouton{
+    display: flex;
+    justify-content: space-between;
+     margin: 20px;
+ }
+
+ .annuler{
+    width: 180px;
+    padding: 10px 20px;
+    border: 2px solid #2E9E3E;
+    border-radius: 12px;
+    background-color: white;
+    color: #2E9E3E;
+    font-size: 16px;
+    font-family: montserrat;
+    font-weight: bold;
+    cursor: pointer;
+ }
+
+ .enregistrer{
+    padding: 10px 20px;
+    border: 2px solid #1E88E5;
+    border-radius: 12px;
+    background-color: #2E9E3E;
+    color: white;
+    font-size: 16px;
+    font-family: montserrat;
+    font-weight: bold;
+    cursor: pointer;
+ }
+
+ .champ{
+    margin-top: 10px;
+    margin-left: 20px;
+    color: gray;
+    font-family: montserrat;
+    font-weight: bold;
+ }
+
+
+ /*RESPONSIVE TABLETTE*/
+@media screen and (max-width: 1024px){
+
+    .formulaire{
+        flex-direction: column;
+    }
+
+    .cote_droite{
+        margin-right: 0;
+        margin-top: 20px;
+    }
+
+    .form_ligne{
+        width: 100%;
+    }
+
+    .form_ligne .form{
+        flex: 1;
+    }
+
+    input,
+    textarea,
+    select{
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #select{
+        width: 100%;
+    }
+
+    .form_ligne .form select{
+        width: 100%;
+    }
+
+    #dateCreation{
+        width: 100%;
+    }
+
+    .info{
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/*RESPONSIVE MOBILE*/
+
+@media screen and (max-width: 768px){
+
+    .container{
+        flex-direction: column;
+    }
+
+    .sidebar{
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .menu{
+        padding: 10px;
+    }
+
+    .icon,
+    .icon_para,
+    .icon_deconn{
+        margin-top: 10px;
+    }
+
+    .icon_deconn{
+        margin-top: 20px;
+    }
+
+    header{
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .section_ajout{
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .formulaire{
+        flex-direction: column;
+    }
+
+    .cote_gauche{
+        padding-left: 0;
+    }
+
+    .form_ligne{
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+    }
+
+    .form_ligne_age,
+    .form_ligne_capacite{
+        margin-left: 0;
+    }
+
+    input,
+    textarea,
+    select{
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form_ligne .form select{
+        width: 100%;
+    }
+
+    #select{
+        width: 100%;
+    }
+
+    #dateCreation{
+        width: 100%;
+    }
+
+    .bouton{
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .annuler,
+    .enregistrer{
+        width: 100%;
+    }
+
+    .upload{
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .info{
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    h1{
+        font-size: 20px;
+    }
+}
