@@ -12,7 +12,28 @@
 
 .login-container { display: flex; background: white; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 90vw;height: 95vh;overflow: hidden; }
 
-.illustration { background: #f0f7f4; padding: 20px 0 20px 20px; display: flex; flex-flow: column nowrap;}
+.illustration {position: relative; background: #f0f7f4; padding: 20px 0 20px 20px; display: flex; flex-flow: column nowrap;}
+
+.btn-back {
+    position: absolute; /* Positionne le bouton en haut à gauche */
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    color: #666;
+    font-weight: bold;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #28a745;
+    background-color:
+}
+
+.btn-back:hover {
+    color: white;
+    background-color:#28a745;
+}
+
 
 .login-box {  padding: 40px; }
 
@@ -29,6 +50,8 @@ input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; bord
 .terms { font-size: 0.75em; color: #666; margin-top: 20px; text-align: center; }
 .logo{
     width: 10vw;
+    position: absolute;
+    top:5em;
     /* margin: auto; */
 }
 .main-img{
@@ -54,6 +77,7 @@ h2{
 <body>
     <div class="login-container">
         <div class="illustration">
+    	<a href="index.jsp" class="btn-back">&larr; Retour</a>
             <img src="assets/images/iconedenkolochi.png" alt="Logo DenKolosi" class="logo">
             <img src="assets/images/Photo de fond.png" alt="Parent et enfant" class="main-img">
         </div>
