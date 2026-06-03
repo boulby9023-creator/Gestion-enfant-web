@@ -10,13 +10,16 @@ public class ConnexionDB {
 	private static ConnexionDB instance = null;
 	private Connection connection = null;
 
-
-
-	public ConnexionDB() {
+	private ConnexionDB() {
 		try {
+			// Force le chargement du driver MySQL pour Tomcat
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
 			this.connection = DriverManager.getConnection(DbConstConfig.url, DbConstConfig.utilisateur,
 					DbConstConfig.mot_de_passe);
 			System.out.println("Connexion MySQL établie avec succès.");
+		} catch (ClassNotFoundException e) {
+			System.err.println("Le driver MySQL est introuvable (JAR manquant) : " + e.getMessage());
 		} catch (SQLException e) {
 			System.err.println("Erreur de connexion à la base de données.");
 			System.err.println("Code SQL  : " + e.getErrorCode());
@@ -38,7 +41,8 @@ public class ConnexionDB {
 
 	public Connection getconnection() {
 		try {
-			if (instance == null || connection.isClosed()) {
+			// On vérifie d'abord si connection est null avant d'appeler isClosed()
+			if (instance == null || this.connection == null || this.connection.isClosed()) {
 				System.out.println("Reconnexion en cours...");
 				instance = new ConnexionDB();
 			}
@@ -46,7 +50,8 @@ public class ConnexionDB {
 			System.err.println("Erreur lors de la vérification de la connexion : " + e.getMessage());
 		}
 
-		return connection;
+		// Si l'initialisation a échoué, on renvoie la connexion de la nouvelle instance
+		return (instance != null) ? instance.connection : null;
 	}
 
 	public void fermer() {
@@ -58,23 +63,6 @@ public class ConnexionDB {
 			}
 		} catch (SQLException e) {
 			System.err.println("Erreur lors de la fermeture : " + e.getMessage());
-		}
-	}
-
-	public static void main(String[] args) {
-		try {
-			Connection con = ConnexionDB.getInstance().getconnection();
-			if (con != null) {
-				Statement pont = con.createStatement();
-				String sql = "INSERT INTO capacites VALUES (NULL, 'Emotionnelle')";
-				int lignesAffectees = pont.executeUpdate(sql);
-
-				System.out.println("Insertion réussie, lignes modifiées : " + lignesAffectees);
-				pont.close();
-				con.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 	}
 

@@ -26,7 +26,6 @@ public void save(Option entity) {
         if (rows > 0) {
             System.out.println("Option insérée avec succès");
         }
-        con.close();
     } catch (SQLException e) {
         e.printStackTrace();
     }
