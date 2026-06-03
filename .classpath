@@ -9,9 +9,5 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="D:/Albanou/Projets/apache-tomcat-11.0.22/lib/servlet-api.jar"/>
-=======
->>>>>>> dc54e00 (seconde commit)
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
