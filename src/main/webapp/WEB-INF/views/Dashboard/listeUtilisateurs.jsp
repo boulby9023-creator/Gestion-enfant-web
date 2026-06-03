@@ -8,6 +8,7 @@
 </head>
 <style>
    .table-container {
+   	margin-top: 25px;
     background-color: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
@@ -15,6 +16,47 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+}
+.b{
+
+    position: absolute;
+    right: 2vw;
+    top: -30px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.ajouter{
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #2E9E3E;
+    width: 10vw;
+    height: 8vh;
+    border-radius: 10px;
+}
+.modifier{
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #F7941D;
+    width: 9vw;
+    height: 8vh;
+    border-radius: 10px;
+}
+.ajouter a {
+	position: absolute;
+	left: 35px;
+    top: 12px;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    text-decoration: none;
+}
+.modifier a{
+	position: absolute;
+    top: 12px;
+	left: 28px;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    text-decoration: none;
 }
 .table-wrapper {
     flex: 1;
@@ -291,9 +333,13 @@ td {
                 <input type="text" placeholder="Rechercher">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
-        </nav>
+        </nav> 
     </header>
     <main>
+    	<div class="b">
+            <div class="ajouter"><a href="${pageContext.request.contextPath}/ServletAjouterUtilisateurs" class="lien">Ajouter</a></div>
+            <div class="modifier"><a href="${pageContext.request.contextPath}/ServletModifier" class="lien">Modifier</a></div>
+        </div>
         <div class="table-container">
                 <div class="table-wrapper">
                     <table>

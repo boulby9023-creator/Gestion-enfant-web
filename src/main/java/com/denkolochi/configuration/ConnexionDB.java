@@ -10,13 +10,15 @@ public class ConnexionDB {
 	private static ConnexionDB instance = null;
 	private Connection connection = null;
 
-
-
-	public ConnexionDB() {
+	private ConnexionDB() {
 		try {
+			Class.forName("com.mysql.cj.jdbc.Driver"); 
+			
 			this.connection = DriverManager.getConnection(DbConstConfig.url, DbConstConfig.utilisateur,
 					DbConstConfig.mot_de_passe);
 			System.out.println("Connexion MySQL établie avec succès.");
+		} catch (ClassNotFoundException e) {
+			System.err.println("Driver MySQL introuvable (Vérifie tes dépendances JAR).");
 		} catch (SQLException e) {
 			System.err.println("Erreur de connexion à la base de données.");
 			System.err.println("Code SQL  : " + e.getErrorCode());
@@ -25,57 +27,38 @@ public class ConnexionDB {
 	}
 
 	public static ConnexionDB getInstance() {
-		try {
-			if (instance == null) {
-				instance = new ConnexionDB();
-			}
-		} catch (Exception e) {
-			System.err.println("probleme de connection : " + e.getMessage());
+		if (instance == null) {
+			instance = new ConnexionDB();
 		}
-
 		return instance;
 	}
 
 	public Connection getconnection() {
 		try {
-			if (instance == null || connection.isClosed()) {
-				System.out.println("Reconnexion en cours...");
-				instance = new ConnexionDB();
+	
+			if (this.connection == null || this.connection.isClosed()) {
+				System.out.println("Connexion inexistante ou fermée. Reconnexion...");
+				this.connection = DriverManager.getConnection(DbConstConfig.url, DbConstConfig.utilisateur,
+						DbConstConfig.mot_de_passe);
 			}
 		} catch (SQLException e) {
 			System.err.println("Erreur lors de la vérification de la connexion : " + e.getMessage());
 		}
 
-		return connection;
+		return this.connection;
 	}
 
 	public void fermer() {
 		try {
 			if (connection != null && !connection.isClosed()) {
 				connection.close();
-				instance = null;
 				System.out.println("Connexion fermée.");
 			}
 		} catch (SQLException e) {
 			System.err.println("Erreur lors de la fermeture : " + e.getMessage());
+		} finally {
+			connection = null;
+			instance = null; 
 		}
 	}
-
-	public static void main(String[] args) {
-		try {
-			Connection con = ConnexionDB.getInstance().getconnection();
-			if (con != null) {
-				Statement pont = con.createStatement();
-				String sql = "INSERT INTO capacites VALUES (NULL, 'Emotionnelle')";
-				int lignesAffectees = pont.executeUpdate(sql);
-
-				System.out.println("Insertion réussie, lignes modifiées : " + lignesAffectees);
-				pont.close();
-				con.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 }
