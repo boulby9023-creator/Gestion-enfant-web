@@ -1,5 +1,5 @@
 package com.denkolochi.enumeration;
 
 public enum RoleEnum {
-	PARENT, ENSEIGNANT, SPECIALISTE, ADMIN
+	parent, enseignant, specialiste, admin
 }

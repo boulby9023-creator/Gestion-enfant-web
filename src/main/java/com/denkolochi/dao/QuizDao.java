@@ -15,10 +15,11 @@ public class QuizDao implements Repository<Quiz,Integer> {
 
 	@Override
 	public void save(Quiz entity) {
-		String sql = "INSERT INTO quiz(temps_limite,score_max) VALUES (?,?)";
+		String sql = "INSERT INTO quiz(titre, temps_limite,score_max) VALUES (?,?)";
 		try (PreparedStatement prepare = con.prepareStatement(sql)) {
-			prepare.setInt(1, entity.getTempsLimitGlobal());
-			prepare.setInt(2, entity.getScoreMax());
+			prepare.setString(1, entity.getTitre());
+			prepare.setInt(2, entity.getTempsLimitGlobal());
+			prepare.setInt(3, entity.getScoreMax());
 
 			int row = prepare.executeUpdate();
 			if (row == 1) {
@@ -43,6 +44,7 @@ public class QuizDao implements Repository<Quiz,Integer> {
 				if (rs.next()) {
 
 					Quiz quiz = new Quiz();
+					quiz.setTitre(rs.getString("titre"));
 					quiz.setTempsLimitGlobal(rs.getInt("temps_limite"));
 					quiz.setScoreMax(rs.getInt("score_max"));
 					return quiz;
@@ -66,6 +68,7 @@ public class QuizDao implements Repository<Quiz,Integer> {
 			while (rs.next()) {
 				Quiz quiz = new Quiz();
 				quiz.setIdQuiz(rs.getInt("id_quiz"));
+				quiz.setTitre(rs.getString("titre"));
 				quiz.setTempsLimitGlobal(rs.getInt("temps_limite"));
 				quiz.setScoreMax(rs.getInt("score_max"));
 				Quizs.add(quiz);
@@ -98,11 +101,12 @@ public class QuizDao implements Repository<Quiz,Integer> {
 
 	@Override
 	public void update(Integer id, Quiz entity) {
-		String sql = "Update QUIZ SET temps_limite = ?,score_max = ?  WHERE id_quiz = ?";
+		String sql = "Update QUIZ SET titre = ?, temps_limite = ?,score_max = ?  WHERE id_quiz = ?";
 		try (PreparedStatement prepare = con.prepareStatement(sql)) {
-			prepare.setInt(1, entity.getTempsLimitGlobal());
-			prepare.setInt(2, entity.getScoreMax());
-			prepare.setInt(3, id);
+			prepare.setString(1, entity.getTitre());
+			prepare.setInt(2, entity.getTempsLimitGlobal());
+			prepare.setInt(3, entity.getScoreMax());
+			prepare.setInt(4, id);
 
 			int row = prepare.executeUpdate();
 			if (row == 1) {

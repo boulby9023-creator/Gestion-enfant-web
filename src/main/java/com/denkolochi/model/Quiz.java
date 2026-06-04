@@ -1,18 +1,20 @@
 package com.denkolochi.model;
 
-import com.denkolochi.enumeration.TypeActivitesEnum;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import com.denkolochi.enumeration.TypeActivitesEnum;
 
 public class Quiz extends Activite {
 
 	private int idQuiz;
+	
+	private String titre;
 
 	private int tempsLimitGlobal;
 
 	private int scoreMax;
-
+	
 	private List<Question> questions;
 
 	// =========================
@@ -27,8 +29,9 @@ public class Quiz extends Activite {
 	// Constructeur simple
 	// =========================
 
-	public Quiz(int tempsLimitGlobal, int scoreMax) {
-
+	public Quiz(String titre, int tempsLimitGlobal, int scoreMax) {
+		
+		this.titre = titre;
 		this.tempsLimitGlobal = tempsLimitGlobal;
 		this.scoreMax = scoreMax;
 	}
@@ -37,9 +40,9 @@ public class Quiz extends Activite {
 	// Constructeur complet
 	// =========================
 
-	public Quiz(int idQuiz, int tempsLimitGlobal, int scoreMax,
+	public Quiz(int idQuiz, String titre, int tempsLimitGlobal, int scoreMax,
 
-			int idActivite, String titre, String descriptions, int ageMin, int ageMax, LocalDateTime dateCreation,
+			int idActivite, String descriptions, int ageMin, int ageMax, LocalDateTime dateCreation,
 			int idCapacite, TypeActivitesEnum typeActivites) {
 
 		super(idActivite, titre, descriptions, ageMin, ageMax, dateCreation, idCapacite, typeActivites);
@@ -53,21 +56,20 @@ public class Quiz extends Activite {
 	// GETTERS & SETTERS
 	// =========================
 
-	public void setQuestions(List<Question> questions) {
-	    this.questions = questions;
-	}
-
-	public List<Question> getQuestions() {
-	    return questions;
-	}
-
-
 	public int getIdQuiz() {
 		return idQuiz;
 	}
 
 	public void setIdQuiz(int idQuiz) {
 		this.idQuiz = idQuiz;
+	}
+	
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
 	}
 
 	public int getTempsLimitGlobal() {
@@ -85,6 +87,16 @@ public class Quiz extends Activite {
 	public void setScoreMax(int scoreMax) {
 		this.scoreMax = scoreMax;
 	}
+	
+	public List<Question> getQuestions() {
+	    return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+	    this.questions = questions;
+	}
+	
+	
 
 	// =========================
 	// hashCode()
