@@ -12,7 +12,7 @@ public class Quiz extends Activite {
 	private int tempsLimitGlobal;
 
 	private int scoreMax;
-
+	
 	private List<Question> questions;
 
 	// =========================
@@ -53,15 +53,6 @@ public class Quiz extends Activite {
 	// GETTERS & SETTERS
 	// =========================
 
-	public void setQuestions(List<Question> questions) {
-	    this.questions = questions;
-	}
-
-	public List<Question> getQuestions() {
-	    return questions;
-	}
-
-
 	public int getIdQuiz() {
 		return idQuiz;
 	}
@@ -85,6 +76,16 @@ public class Quiz extends Activite {
 	public void setScoreMax(int scoreMax) {
 		this.scoreMax = scoreMax;
 	}
+	
+	public List<Question> getQuestions() {
+	    return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+	    this.questions = questions;
+	}
+	
+	
 
 	// =========================
 	// hashCode()

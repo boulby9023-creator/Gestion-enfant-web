@@ -1,3 +1,4 @@
+<%@page import="com.denkolochi.model.Option"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.denkolochi.model.Quiz" %>
 <%@ page import="com.denkolochi.model.Question" %>
@@ -7,6 +8,7 @@
     Quiz quiz = (Quiz) session.getAttribute("quiz");
     Integer currentIndex = (Integer) session.getAttribute("currentIndex");
     Integer score = (Integer) session.getAttribute("score");
+    Integer bonneReponses = (Integer) session.getAttribute("bonneReponses");
     List<Integer> reponsesUtilisateur = (List<Integer>) session.getAttribute("reponsesUtilisateur");
 
     if (currentIndex == null) currentIndex = 0;
@@ -17,8 +19,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../assets/css/jeu_quiz.css">
+    <link rel="stylesheet" href="jeu_quiz.css">
     <title><%= (quiz != null) ? quiz.getTitre() : "Page quiz" %></title>
+    
+    <script>
+		window.addEventListener('load', function() {
+		    const questionActuelle = document.getElementById('actuel');
+		
+		    if (questionActuelle) {
+		        questionActuelle.scrollIntoView({
+		            behavior: 'smooth',
+		            block: 'center'
+		        });
+		    }
+		});
+</script>
 </head>
 <body>
     <div class="container">
@@ -42,9 +57,8 @@
             <form action="${pageContext.request.contextPath}/QuizServlet" method="post" class="main-gauche">
                 
                 <div class="progression">
-                    <h2>Progression : <%= quiz.getTitre() %> ${currentIndex }</h2>
+                    <h2>Progression : <%= quiz.getTitre() %> </h2>
                     <div class="progress">
-                        <!-- Barre de progression calculée selon l'index en cours -->
                         <div class="progress-bar" style="width: <%= (currentIndex == totalQuestions - 1) ? "100" : progressionPourcentage %>%"></div>
                     </div>
                 </div>
@@ -56,36 +70,40 @@
                     </p>
                     <p>
                         <span>Délai imparti : <%= questionActuelle.getDelai_max() %>s</span> | 
-                        <span>Valeur : <%= questionActuelle.getScore() %> pts</span>
+                        
                     </p>
                     <p><strong>Veuillez choisir une réponse : </strong></p>
                     
                     <div class="propositions">
-                        <label class="reponse <%= (userSelection == 0) ? "selectionnee" : "" %>">
-                            <input type="radio" name="reponse" value="0" <%= (userSelection == 0) ? "checked" : "" %> onchange="this.form.submit()">
-                            <span>A. Scorpion revenu d'entre les morts</span>
-                        </label>
-                        
-                        <label class="reponse <%= (userSelection == 1) ? "selectionnee" : "" %>">
-                            <input type="radio" name="reponse" value="1" <%= (userSelection == 1) ? "checked" : "" %> onchange="this.form.submit()">
-                            <span>B. Bi-Han, le tout premier Sub-Zero</span>
-                        </label>
-                        
-                        <label class="reponse <%= (userSelection == 2) ? "selectionnee" : "" %>">
-                            <input type="radio" name="reponse" value="2" <%= (userSelection == 2) ? "checked" : "" %> onchange="this.form.submit()">
-                            <span>C. Kuai Liang, le second Sub-Zero</span>
-                        </label>
-                        
-                        <label class="reponse <%= (userSelection == 3) ? "selectionnee" : "" %>">
-                            <input type="radio" name="reponse" value="3" <%= (userSelection == 3) ? "checked" : "" %> onchange="this.form.submit()">
-                            <span>D. Un clone raté créé par Shang Tsung</span>
-                        </label>
+			                        <%
+			List<Option> options = questionActuelle.getOptions();
+			
+			for (int i = 0; i < options.size(); i++) {
+			    Option opt = options.get(i);
+			%>
+			
+			<label class="reponse <%= (userSelection == i) ? "selectionnee" : "" %>">
+			
+			    <input type="radio"
+			           name="reponse"
+			           value="<%= i %>"
+			           <%= (userSelection == i) ? "checked" : "" %>
+			           
+			           ">
+			
+			    <span><%= opt.getTexte() %></span>
+			
+			</label>
+			
+			<%
+			}
+			%>
                     </div>
                 </div>
 
                 <div class="bouton-bas">
                     <button type="submit" name="nav" value="precedent" class="precedent" <%= (currentIndex == 0) ? "disabled" : "" %>>Précédent</button>
-                    <button type="submit" name="nav" value="suivant" class="suivant" <%= (currentIndex == totalQuestions - 1) ? "disabled" : "" %>>Suivant</button>
+                    <button onclick="window.scrollTo({top:10px, behavior:'smooth'})" type="submit" name="nav" value="suivant" class="suivant" <%= (currentIndex == totalQuestions - 1) ? "disabled" : ""  %>>Suivant</button>
                 </div>
 
             </form>
@@ -97,7 +115,7 @@
 
             <div class="main-droite">
                 <div class="score">
-                    <h2><%= score %>%</h2>
+                    <h2><%= score %></h2>
                     <p>Votre score</p>
                 </div>
 
@@ -110,7 +128,7 @@
                                 
                                 if (i == currentIndex) {
                                     idAttr = "id='actuel'";
-                                } else if (rep != -1 && rep == 1) { // 1 = Réponse arbitraire estimée correcte (B)
+                                } else if (rep != -1 && rep == 1) { 
                                     idAttr = "id='vrai'";
                                 } else if (rep != -1 && rep != 1) {
                                     idAttr = "id='faux'";
