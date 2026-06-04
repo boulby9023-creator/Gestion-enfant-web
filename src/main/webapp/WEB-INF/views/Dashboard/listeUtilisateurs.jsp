@@ -1,4 +1,7 @@
-<html lang="en">
+<%@page import="java.util.List"%>
+<%@page import="com.denkolochi.model.Utilisateur"%>
+<%@ page language="java" %>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +10,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <style>
+body{
+	box-sizing:border-box;
+	width:100%;
+	overflow-x:hidden;
+}
    .table-container {
    	margin-top: 25px;
     background-color: #ffffff;
@@ -64,10 +72,12 @@
 }
 
 table {
-    width: 80vw;
+	overflow-x: hidden;
+    width: 78vw;
     height: 65vh;
     border-collapse: collapse;
     text-align: left;
+    display: block;
 }
 
 thead {
@@ -76,6 +86,7 @@ thead {
     position: sticky;
     top: 0;
     z-index: 10;
+    width:100%;
 }
 th {
     font-family: 'Montserrat', sans-serif;
@@ -83,6 +94,7 @@ th {
     font-size: 13px;
     font-weight: 600;
     color: #334155;
+    
 }
 
 .col-avatar { 
@@ -93,6 +105,7 @@ th {
 
 tbody tr {
     border-bottom: 1px solid #f1f5f9;
+    width:100%;
 }
 
 tbody tr:last-child {
@@ -104,7 +117,7 @@ tbody tr:hover {
 }
 td {
     font-family: 'Montserrat', sans-serif;
-    padding: 10px 20px;
+    padding: 10px 32px;
     font-size: 13px;
     color: #475569;
     vertical-align: middle;
@@ -140,6 +153,10 @@ td {
     cursor: pointer;
     width: 60px;
     padding-right: 25px;
+}
+
+a{
+	color: orange;
 }
 .page-item {
     display: inline-flex;
@@ -338,12 +355,12 @@ td {
     <main>
     	<div class="b">
             <div class="ajouter"><a href="${pageContext.request.contextPath}/ServletAjouterUtilisateurs" class="lien">Ajouter</a></div>
-            <div class="modifier"><a href="${pageContext.request.contextPath}/ServletModifier" class="lien">Modifier</a></div>
         </div>
         <div class="table-container">
                 <div class="table-wrapper">
                     <table>
                         <thead>
+                        
                             <tr>
                                 <th class="col-avatar"></th>
                                 <th>Prenom</th>
@@ -355,31 +372,26 @@ td {
                             </tr>
                         </thead>
                         <tbody>
+                        <% List<Utilisateur> users=(List<Utilisateur>)request.getAttribute("users"); 
+                        for( Utilisateur listeutil : users){ %>
                         <tr>
                            <td class="col-avatar">
                               <div class="row-avatar"><i class="fa-regular fa-user"></i></div>
                            	</td>
-                          	<td>Hamath</td>
-							<td>Diallo</td>
-							<td>hamath.o.diallo18@gmail.com</td>
-							<td>223 61942634</td>
-							<td><span class="badge">Parent</span></td>
-                            <td class="actions-cell"><i class="fa-solid fa-ellipsis"></i></td>
+                          	<td><%= listeutil.getPrenom() %></td>
+							<td><%= listeutil.getNom() %></td>
+							<td><%= listeutil.getMail()  %></td>
+							<td><%= listeutil.getTel() %></td>
+							<td><span class="badge"><% out.println( listeutil.getRole()); %></span></td>
+                            <td class="actions-cell">
+                            	<a href="${pageContext.request.contextPath}/ServletModifier?id=<%= listeutil.getId()  %>">
+                            		<i class="fa-solid fa-pen-to-square"></i>
+                            	</a>
+                            </td>
                        </tr>
+                       <% } %>
                         </tbody>
                     </table>
-                </div>
-
-                <div class="pagination">
-                    <a class="page-item"><i class="fa-solid fa-chevron-left"></i> Previous</a>
-                    <a class="page-item">1</a>
-                    <a class="page-item active">2</a>
-                    <a class="page-item">3</a>
-                    <a class="page-item">4</a>
-                    <a class="page-item">5</a>
-                    <span class="page-dots">...</span>
-                    <a class="page-item">11</a>
-                    <a class="page-item">Next <i class="fa-solid fa-chevron-right"></i></a>
                 </div>
             </div>
     </main>

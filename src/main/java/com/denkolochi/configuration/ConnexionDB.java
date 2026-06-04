@@ -3,7 +3,6 @@ package com.denkolochi.configuration;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class ConnexionDB {
 
@@ -12,13 +11,14 @@ public class ConnexionDB {
 
 	private ConnexionDB() {
 		try {
+			// 🌟 ÉTIQUETTE DE SÉCURITÉ POUR TOMCAT : Force l'enregistrement du Driver MySQL
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
 			
 			this.connection = DriverManager.getConnection(DbConstConfig.url, DbConstConfig.utilisateur,
 					DbConstConfig.mot_de_passe);
 			System.out.println("Connexion MySQL établie avec succès.");
 		} catch (ClassNotFoundException e) {
-			System.err.println("Driver MySQL introuvable (Vérifie tes dépendances JAR).");
+			System.err.println("Driver MySQL JDBC introuvable. Ajoutez le JAR dans WEB-INF/lib.");
 		} catch (SQLException e) {
 			System.err.println("Erreur de connexion à la base de données.");
 			System.err.println("Code SQL  : " + e.getErrorCode());
@@ -34,17 +34,15 @@ public class ConnexionDB {
 	}
 
 	public Connection getconnection() {
-		try {
-	
+		try {	
 			if (this.connection == null || this.connection.isClosed()) {
 				System.out.println("Connexion inexistante ou fermée. Reconnexion...");
 				this.connection = DriverManager.getConnection(DbConstConfig.url, DbConstConfig.utilisateur,
 						DbConstConfig.mot_de_passe);
-			}
+			} 
 		} catch (SQLException e) {
 			System.err.println("Erreur lors de la vérification de la connexion : " + e.getMessage());
 		}
-
 		return this.connection;
 	}
 
@@ -58,7 +56,7 @@ public class ConnexionDB {
 			System.err.println("Erreur lors de la fermeture : " + e.getMessage());
 		} finally {
 			connection = null;
-			instance = null; 
+			instance = null; // 🌟 Nettoyé : Plus aucun caractère invisible ici !
 		}
 	}
 }

@@ -54,7 +54,7 @@ public class ImplUtilisateurDao implements Repository<Utilisateur, Integer>{
 				utilisateur.setTel(result.getString("tel"));
 				utilisateur.setMail(result.getString("mail"));
 				utilisateur.setMotDePasse(result.getString("mot_de_passe"));
-				utilisateur.setRole(RoleEnum.valueOf(result.getString("role")));
+				utilisateur.setRole(RoleEnum.valueOf(result.getString("roles")));
 
 				return utilisateur;
 			}
@@ -68,20 +68,20 @@ public class ImplUtilisateurDao implements Repository<Utilisateur, Integer>{
 	@Override
 	public List<Utilisateur> findAll() {
 
-		List<Utilisateur> utilisateurs = new ArrayList();
-		Utilisateur utilisateur = new Utilisateur();
+		List<Utilisateur> utilisateurs = new ArrayList<>();
 		String sql = "SELECT * FROM utilisateurs";
 		try {
 			Statement stat = con.createStatement();
 			ResultSet result = stat.executeQuery(sql);
 			while (result.next()) {
+				Utilisateur utilisateur = new Utilisateur();
 				utilisateur.setId(result.getInt("id"));
 				utilisateur.setNom(result.getString("nom"));
 				utilisateur.setPrenom(result.getString("prenom"));
 				utilisateur.setTel(result.getString("tel"));
 				utilisateur.setMail(result.getString("mail"));
 				utilisateur.setMotDePasse(result.getString("mot_de_passe"));
-				utilisateur.setRole(RoleEnum.valueOf(result.getString("role")));
+				utilisateur.setRole(RoleEnum.valueOf(result.getString("roles")));
 
 				utilisateurs.add(utilisateur);
 				utilisateur = null;

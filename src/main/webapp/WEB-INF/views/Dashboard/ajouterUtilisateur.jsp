@@ -357,7 +357,7 @@ div .photo-profil{
             <div class="form-section">
                 <div class="section-badge">Gestion des Utilisateurs</div>
                 
-                <form class="form-grid" action="ServletAjouterUtilisateurs" method="post">
+                <form class="form-grid" action="ServletAjouterUtilisateurs" method="post" id="enregistrement">
                     <div class="form-group">
                         <label>Nom</label>
                         <input type="text" name = "nom" placeholder="Veuillez saisir le nom de l'utilisateur">
@@ -394,7 +394,7 @@ div .photo-profil{
                 </form>
 
                 <div class="form-actions">
-                    <input type="submit" value="Envoyer" class="btn-submit">
+                    <input type="submit" value="Envoyer" class="btn-submit" form="enregistrement">
                 </div>
             </div>
 
