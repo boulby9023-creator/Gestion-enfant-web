@@ -1,8 +1,10 @@
 package com.denkolochi.model;
 
-import com.denkolochi.enumeration.TypeActivitesEnum;
+import java.sql.Date;
 
-import java.time.LocalDateTime;
+//import com.denkolochi.enumeration.TypeActivitesEnum;
+
+//import java.time.LocalDateTime;
 
 public class Activite {
 
@@ -13,11 +15,11 @@ public class Activite {
 	private int ageMin;
 	private int ageMax;
 
-	private LocalDateTime dateCreation;
+	private Date dateCreation;
 
 	private int idCapacite;
 
-	private TypeActivitesEnum typeActivites;
+	private String typeActivites;
 
 	// =========================
 	// =========================
@@ -29,7 +31,7 @@ public class Activite {
 	// =========================
 
 	public Activite(int idActivite, String titre, String descriptions, int ageMin, int ageMax,
-			LocalDateTime dateCreation, int idCapacite, TypeActivitesEnum typeActivites) {
+			Date dateCreation, int idCapacite, String typeActivites) {
 
 		this.idActivite = idActivite;
 		this.titre = titre;
@@ -85,12 +87,12 @@ public class Activite {
 		this.ageMax = ageMax;
 	}
 
-	public LocalDateTime getDateCreation() {
+	public Date getDateCreation() {
 		return dateCreation;
 	}
 
-	public void setDateCreation(LocalDateTime dateCreation) {
-		this.dateCreation = dateCreation;
+	public void setDateCreation(Date date) {
+		this.dateCreation = date;
 	}
 
 	public int getIdCapacite() {
@@ -101,12 +103,12 @@ public class Activite {
 		this.idCapacite = idCapacite;
 	}
 
-	public TypeActivitesEnum getTypeActivites() {
+	public String getTypeActivites() {
 		return typeActivites;
 	}
 
-	public void setTypeActivites(TypeActivitesEnum typeActivites) {
-		this.typeActivites = typeActivites;
+	public void setTypeActivites(String type) {
+		this.typeActivites = type;
 	}
 
 	// =========================

@@ -70,6 +70,16 @@ public class ImplUtilisateurDao implements Repository<Utilisateur, Integer> {
         }
     }
 
+
+			if (result.next()) {
+				utilisateur.setId(result.getInt("id"));
+				utilisateur.setNom(result.getString("nom"));
+				utilisateur.setPrenom(result.getString("prenom"));
+				utilisateur.setTel(result.getString("tel"));
+				utilisateur.setMail(result.getString("mail"));
+				utilisateur.setMotDePasse(result.getString("mot_de_passe"));
+				utilisateur.setRole(RoleEnum.valueOf(result.getString("roles")));
+
     @Override
     public void update(Integer id, Utilisateur entity) {
         String sql = "UPDATE utilisateurs SET nom = ?, prenom = ?, tel = ?, mail = ?, mot_de_passe = ?, roles = ? WHERE id = ?";
@@ -86,6 +96,7 @@ public class ImplUtilisateurDao implements Repository<Utilisateur, Integer> {
             throw new RuntimeException(e);
         }
     }
+
 
     public Utilisateur findByMail(String mail) {
         String sql = "SELECT * FROM utilisateurs WHERE mail = ?";
@@ -123,7 +134,24 @@ public class ImplUtilisateurDao implements Repository<Utilisateur, Integer> {
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
+
+		List<Utilisateur> utilisateurs = new ArrayList<>();
+		String sql = "SELECT * FROM utilisateurs";
+		try {
+			Statement stat = con.createStatement();
+			ResultSet result = stat.executeQuery(sql);
+			while (result.next()) {
+				Utilisateur utilisateur = new Utilisateur();
+				utilisateur.setId(result.getInt("id"));
+				utilisateur.setNom(result.getString("nom"));
+				utilisateur.setPrenom(result.getString("prenom"));
+				utilisateur.setTel(result.getString("tel"));
+				utilisateur.setMail(result.getString("mail"));
+				utilisateur.setMotDePasse(result.getString("mot_de_passe"));
+				utilisateur.setRole(RoleEnum.valueOf(result.getString("roles")));
+
             ps.setString(1, mail);
+
 
             try (ResultSet rs = ps.executeQuery()) {
 
