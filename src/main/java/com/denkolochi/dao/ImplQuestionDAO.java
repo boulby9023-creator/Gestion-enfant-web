@@ -28,8 +28,6 @@ public class ImplQuestionDAO implements Repository<Question, Integer> {
 			if (b > 0) {
 				System.err.println("Question inserer avec succès");
 			}
-
-			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
