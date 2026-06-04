@@ -100,21 +100,31 @@
         <div class="bloc-formulaire">
             <h2>Créer un compte</h2>
             
-            <form action="registerAction.jsp" method="POST">
-                <label>Nom complet</label>
-                <input type="text" placeholder="Entrer votre nom" required>
-                
-                <label>Email</label>
-                <input type="email" placeholder="Entrer votre email" required>
-                
-                <label>Mot de passe</label>
-                <input type="password" placeholder="Choisir un mot de passe" required>
-                
-                <label>Confirmer le mot de passe</label>
-                <input type="password" placeholder="Confirmer le mot de passe" required>
-                
-                <button type="submit" class="bouton-inscription">S'inscrire</button>
-            </form>
+           <form action="inscriptionaction" method="POST">
+    <label>Nom</label>
+    <input type="text" name="nom" placeholder="Entrer votre nom" required>
+    
+    <label>Prénom</label>
+    <input type="text" name="prenom" placeholder="Entrer votre prénom" required>
+    
+    <label>Téléphone</label>
+    <input type="text" name="tel" placeholder="Entrer votre téléphone" required>
+    
+    <label>Email</label>
+    <input type="email" name="mail" placeholder="Entrer votre email" required>
+    
+    <label>Mot de passe</label>
+    <input type="password" name="password" placeholder="Choisir un mot de passe" required>
+
+    <label>Profil</label>
+    <select name="role" style="width:100%; padding:10px; border-radius:8px;">
+        <option value="PARENT">Parent</option>
+        <option value="ENSEIGNANT">Enseignant</option>
+        <option value="SPECIALISTE">Spécialiste</option>
+    </select>
+    
+    <button type="submit" class="bouton-inscription">S'inscrire</button>
+</form>
 
             <div class="lien-retour">
                 Déjà inscrit ? <a href="connexion">Connectez-vous</a>

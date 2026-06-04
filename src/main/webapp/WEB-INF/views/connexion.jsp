@@ -51,6 +51,9 @@
         <div class="bloc-formulaire">
             <h2>Bienvenue !</h2>
             <p>Connectez-vous pour accéder au suivi intelligent de votre enfant.</p>
+            <% if (request.getAttribute("erreur") != null) { %>
+   				 <p style="color: red;"><%= request.getAttribute("erreur") %></p>
+			<% } %>
             
             <form action="loginaction" method="POST">
                 <label>Email</label>
