@@ -576,7 +576,7 @@
 						<div class="d-flex align-items-center gap-3">
 
 							<img
-								src="${pageContext.request.contextPath}/assets/images/image10.png"
+								src="${pageContext.request.contextPath}/assets/images/femme2.png"
 								alt="Parent" class="rounded-circle" width="70" height="70">
 
 							<div>
@@ -607,7 +607,7 @@
 						<div class="d-flex align-items-center gap-3">
 
 							<img
-								src="${pageContext.request.contextPath}/assets/images/image10.png"
+								src="${pageContext.request.contextPath}/assets/images/femme1.png"
 								alt="Parent" class="rounded-circle" width="70" height="70">
 
 							<div>
