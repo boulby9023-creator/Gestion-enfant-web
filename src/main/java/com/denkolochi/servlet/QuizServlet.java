@@ -58,9 +58,11 @@ public class QuizServlet extends HttpServlet {
 
             session.setAttribute("reponsesUtilisateur", reponses);
         }
-
-        request.getRequestDispatcher("/jeu_quiz.jsp").forward(request, response);
+        
+        request.getRequestDispatcher("/WEB-INF/views/jeu_quiz.jsp").forward(request, response);
     }
+    
+    
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();

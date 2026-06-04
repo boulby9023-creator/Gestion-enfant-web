@@ -1,6 +1,7 @@
 package com.denkolochi.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import com.denkolochi.enumeration.TypeActivitesEnum;
 
