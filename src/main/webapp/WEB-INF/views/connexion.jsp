@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="accueil.css">
     <title>Connexion - DenKolosi</title>
     <style>
+
         body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; background-color: #f9f9f9; }
 
         .conteneur-connexion { display: flex; background: white; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 90vw; height: 95vh; overflow: hidden; }
@@ -46,6 +47,7 @@
         <div class="zone-illustration">
             <img src="assets/images/iconedenkolochi.png" alt="Logo DenKolosi" class="logo-denkolochi">
             <img src="assets/images/Photo de fond.png" alt="Parent et enfant" class="image-principale">
+
         </div>
 
         <div class="bloc-formulaire">

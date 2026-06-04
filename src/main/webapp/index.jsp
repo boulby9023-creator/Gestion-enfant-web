@@ -72,7 +72,8 @@
 
 				</ul>
 
-				<a href="#" class="btn btn-login me-2"> Connexion </a> <a href="#"
+				<a  href="${pageContext.request.contextPath}/Connexion" class="btn btn-login me-2"> Connexion </a> 
+				<a href="${pageContext.request.contextPath}/inscription"
 					class="btn btn-register"> Inscription </a>
 
 			</div>
@@ -93,7 +94,7 @@
 						corporel des enfants.</p>
 					<div class="mt-4">
 
-						<a href="#" class="btn btn-main me-3"> Commencer gratuitement
+						<a href="${pageContext.request.contextPath}/inscription" class="btn btn-main me-3 mb-3"> Commencer gratuitement
 						</a> <a href="#" class="btn btn-outline-custom"> Découvrir les
 							fonctionnalités </a>
 
@@ -493,13 +494,13 @@
 	<section class="explication-section">
 		<div class="container">
 			<div class="row align-items-center py-4">
-				<div class="col-lg-6 mx-4">
+				<div class="col-lg-6 mb-2">
 					<img
 						src="${pageContext.request.contextPath}/assets/images/image07.png"
 						class="img-fluid hero-image"
 						alt="Un tableau de bord intelligent pour les parents">
 				</div>
-				<div class="col-lg-5 ml-4">
+				<div class="col-lg-5 ml-4 à">
 					<h3>Un tableau de bord intelligent pour les parents</h3>
 					<p>Visualisez les progrès de votre enfant à travers des
 						graphiques clairs, des rapports détaillés et des recommandations
@@ -699,7 +700,7 @@
 					</div>
 
 					<!-- BUTTON -->
-					<div class="col-lg-2 text-lg-end text-center">
+					<div class="col-lg-2 text-lg-end text-center mb-4">
 
 						<a href="#" class="btn btn-success px-4 py-3 rounded-3 fw-bold">
 
@@ -749,7 +750,7 @@
 					<div class="col-lg-5">
 
 						<div
-							class="d-flex flex-column flex-md-row justify-content-lg-end gap-3">
+							class="d-flex flex-column flex-md-row justify-content-lg-end gap-3 mb-4">
 
 
 							<a href="#" class="btn btn-cta me-3"> 
