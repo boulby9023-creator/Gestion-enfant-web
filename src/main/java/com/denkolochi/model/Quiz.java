@@ -13,6 +13,8 @@ public class Quiz extends Activite {
 	private int tempsLimitGlobal;
 
 	private int scoreMax;
+	
+	private List<Question> questions;
 
 	// =========================
 	// Constructeur vide
@@ -84,6 +86,16 @@ public class Quiz extends Activite {
 	public void setScoreMax(int scoreMax) {
 		this.scoreMax = scoreMax;
 	}
+	
+	public List<Question> getQuestions() {
+	    return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+	    this.questions = questions;
+	}
+	
+	
 
 	// =========================
 	// hashCode()

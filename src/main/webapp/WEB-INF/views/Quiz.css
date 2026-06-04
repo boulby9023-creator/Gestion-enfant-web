@@ -171,7 +171,8 @@ main{
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    /* overflow-y: auto; */
+    overflow-y: scroll;
+    mar
     /* border: solid 1px black; */
     scroll-behavior: smooth;
 white-space: nowrap;
