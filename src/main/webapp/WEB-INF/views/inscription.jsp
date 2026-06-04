@@ -123,7 +123,7 @@ input {
 		<div class="bloc-formulaire">
 			<h2>Créer un compte</h2>
 
-			<form action="inscriptionaction" method="POST">
+			<form action="inscription" method="POST">
 
 				<label>Nom</label> <input type="text" name="nom"
 					value="${param.nom}" placeholder="Entrer votre nom" required>
