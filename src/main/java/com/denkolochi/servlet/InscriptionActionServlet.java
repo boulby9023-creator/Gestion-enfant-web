@@ -13,7 +13,7 @@ import com.denkolochi.model.Parent;
 import com.denkolochi.model.Utilisateur;
 import com.denkolochi.enumeration.RoleEnum;
 
-@WebServlet("/inscriptionaction")
+@WebServlet("/inscription")
 public class InscriptionActionServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
