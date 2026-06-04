@@ -59,44 +59,44 @@
                   <form action="pageContext.request.contextPath}/Ajout_Activite" method="post" enctype="multipart/form-data" >
                      <div class="form">
                      <label for="" class="label_gauche">Titre de l'activité *</label>
-                     <input type="text" placeholder="Ex: Jeu de mémoire">
+                     <input type="text" name = "titre_Activite" placeholder="Ex: Jeu de mémoire" required>
                   </div>
                   <div class="form">
                      <label for="" class="label_gauche">Description *</label>
-                     <textarea placeholder="Décrivez l’activité en détail..."></textarea>
+                     <textarea  name = "description" placeholder="Décrivez l’activité en détail..." required></textarea>
                   </div>
                   <div class="form_ligne">
                       <div class="form">
                           <label for="" class="label_gauche">Âge minimum *</label>
-                          <input type="number" placeholder="Ex: 5">
+                          <input type="number" name = "agemin" placeholder="Ex: 5" required>
                       </div>
                       <div class="form">
                           <div class="form_ligne_age">
                           <label for="" class="label_gauche">Âge maximum *</label>
-                          <input type="number" placeholder="Ex: 10">
+                          <input type="number" name = "agemax" placeholder="Ex: 10" required>
                           </div>
                       </div>
                   </div>
                   <div class="form_ligne">
                       <div class="form">
                         <label for="" class="label_gauche">Type d'activité *</label>
-                        <select id="select" name="">
+                        <select id="select" name="type_activite" required>
                           <option value="">Sélectionnez un type</option>
-                          <option value="1">Cognitif</option>
-                          <option value="2">Intellectuel</option>
-                          <option value="3">émotionnel et mental</option>
+                          <option value="Congnitif">Cognitif</option>
+                          <option value="Intellectuel">Intellectuel</option>
+                          <option value="Emotionnel">émotionnel et mental</option>
                         </select>
                       </div>
                       <div class="form">
                         <div class="form_ligne_capacite">
                         <label for="" class="label_gauche">Capacité *</label>
-                        <select name="" id="">
+                        <select name="capacite" id="" required>
                           <option value="">Sélectionnez une capacité</option>
-                          <option value="1">Mémoire</option>
-                          <option value="2">Attention</option>
-                          <option value="3">Logique</option>
-                          <option value="4">Résolution de problèmes</option>
-                          <option value="5">Concentration</option>
+                          <option value="Memoire">Mémoire</option>
+                          <option value="Attention">Attention</option>
+                          <option value="Logique">Logique</option>
+                          <option value="Resolution">Résolution de problèmes</option>
+                          <option value="Concentration">Concentration</option>
                         </select>
                         </div>
                       </div>
@@ -109,7 +109,7 @@
                     <br>
                     <label for="fileUpload">Glissez-déposez une image ici</label>
                     <br>
-                    <input type="file" id="fileUpload" accept=".jpg, .png" hidden>
+                    <input type="file" name = "image" id="fileUpload" accept=".jpg, .png" hidden>
                     <strong>ou cliquer pour parcourir</strong>
                     <br>
                     <small> Format acceptés: JPG, PNG (Max 2Mo)</small>
@@ -117,7 +117,7 @@
                   <div class="form">
                     <section id="date_section">
                     <label for="fileUpload" class="label_droite">Date de création *</label>
-                    <input type="date"  id="dateCreation">
+                    <input type="date" name = "date_creation" id="dateCreation" required>
                     </section>
                   </div>
                   <div class="info">
@@ -128,8 +128,8 @@
                </div>
             </div>
               <div class="bouton">
-                  <button class="annuler">Annuler</button>
-                  <button class="enregistrer">Enregistrer l'activité</button>
+                  <button type = "reset" class="annuler">Annuler</button>
+                  <button type = "submit" class="enregistrer">Enregistrer l'activité</button>
               </div>
                </form>  
           </main>
