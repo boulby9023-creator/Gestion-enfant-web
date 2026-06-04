@@ -26,7 +26,7 @@
     align-items: center;
     gap: 5px;
     border: 1px solid #28a745;
-    background-color:
+    border-radius:10px 10px;
 }
 
 .btn-back:hover {
