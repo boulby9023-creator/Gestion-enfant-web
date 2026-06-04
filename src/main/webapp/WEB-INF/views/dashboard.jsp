@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
 <!DOCTYPE html>
@@ -154,7 +155,7 @@
 
                 <i class="bi bi-people-fill"></i>
 
-                <h3>2</h3>
+                <h3>${nbEnfants}</h3>
 
                 <p>Enfants suivis</p>
 
@@ -168,7 +169,7 @@
 
                 <i class="bi bi-clipboard-check-fill"></i>
 
-                <h3>24</h3>
+                <h3>${nb_quiz_realises}</h3>
 
                 <p>Activités réalisées</p>
 
@@ -223,107 +224,47 @@
 
             </div>
 
-            <button class="btn btn-success">
-                Ajouter un enfant
-            </button>
+             <a href="<%=request.getContextPath()%>/liste-enfant" class="underline">
+                            Voir plus
+                        </a>
 
         </div>
 
         <div class="row g-4 mt-2">
-
+        
+        <%
+    List<com.denkolochi.model.Enfant> enfants = (List<com.denkolochi.model.Enfant>) request.getAttribute("enfants");
+    if (enfants != null) {
+    	int count = 0;
+        for (com.denkolochi.model.Enfant e : enfants) {
+        	 if (count >= 2) break;
+%>
             <div class="col-lg-6">
-
                 <div class="child-card">
-
                     <div class="child-info">
-
-                        <img
-                            src="${pageContext.request.contextPath}/assets/images/girl.png"
-                            alt="">
-
+                        <img src="<%=request.getContextPath()%>/assets/images/girl.png" alt="">
                         <div>
-
-                            <h5>Awa Traoré</h5>
-
-                            <p>9 ans • Primaire</p>
-
+                            <h5><%= e.getPrenom() %> <%= e.getNom() %></h5>
+                            <p><%= e.getDate_naissance() %> • <%= e.getSexe() %></p>
                         </div>
-
                     </div>
-
                     <div class="child-actions">
-
-                        <a href="${pageContext.request.contextPath}/child-profile"
-                           class="btn btn-success">
-
+                        <a href="<%=request.getContextPath()%>/child-profile?id=<%= e.getId() %>" class="btn btn-success">
                             Voir le profil
-
                         </a>
-
-                        <button class="btn btn-light">
-
-                            <i class="bi bi-pencil"></i>
-
-                        </button>
-
-                        <button class="btn btn-light">
-
-                            <i class="bi bi-three-dots-vertical"></i>
-
-                        </button>
-
+                        <button class="btn btn-light"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-light"><i class="bi bi-three-dots-vertical"></i></button>
                     </div>
-
                 </div>
-
             </div>
+<%
+ count++;
+        }
+    }
+%>
+        
+      
 
-            <div class="col-lg-6">
-
-                <div class="child-card">
-
-                    <div class="child-info">
-
-                        <img
-                            src="${pageContext.request.contextPath}/assets/images/boy.png"
-                            alt="">
-
-                        <div>
-
-                            <h5>Moussa Keita</h5>
-
-                            <p>7 ans • Primaire</p>
-
-                        </div>
-
-                    </div>
-
-                    <div class="child-actions">
-
-                        <a href="${pageContext.request.contextPath}/child-profile"
-                           class="btn btn-success">
-
-                            Voir le profil
-
-                        </a>
-
-                        <button class="btn btn-light">
-
-                            <i class="bi bi-pencil"></i>
-
-                        </button>
-
-                        <button class="btn btn-light">
-
-                            <i class="bi bi-three-dots-vertical"></i>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
 
         </div>
 
