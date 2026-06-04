@@ -11,14 +11,8 @@ public class ConnexionDB {
 
 	private ConnexionDB() {
 		try {
-			// 🌟 ÉTIQUETTE DE SÉCURITÉ POUR TOMCAT : Force l'enregistrement du Driver MySQL
-			Class.forName("com.mysql.cj.jdbc.Driver"); 
-			
-			this.connection = DriverManager.getConnection(DbConstConfig.url, DbConstConfig.utilisateur,
-					DbConstConfig.mot_de_passe);
+			this.connection = DriverManager.getConnection(DbConstConfig.url, DbConstConfig.utilisateur,DbConstConfig.mot_de_passe);
 			System.out.println("Connexion MySQL établie avec succès.");
-		} catch (ClassNotFoundException e) {
-			System.err.println("Driver MySQL JDBC introuvable. Ajoutez le JAR dans WEB-INF/lib.");
 		} catch (SQLException e) {
 			System.err.println("Erreur de connexion à la base de données.");
 			System.err.println("Code SQL  : " + e.getErrorCode());
@@ -27,9 +21,14 @@ public class ConnexionDB {
 	}
 
 	public static ConnexionDB getInstance() {
-		if (instance == null) {
-			instance = new ConnexionDB();
+		try {
+			if (instance == null) {
+				instance = new ConnexionDB();
+			}
+		} catch (Exception e) {
+			System.err.println("probleme de connection : " + e.getMessage());
 		}
+
 		return instance;
 	}
 
@@ -44,12 +43,14 @@ public class ConnexionDB {
 			System.err.println("Erreur lors de la vérification de la connexion : " + e.getMessage());
 		}
 		return this.connection;
+
 	}
 
 	public void fermer() {
 		try {
 			if (connection != null && !connection.isClosed()) {
 				connection.close();
+				instance = null;
 				System.out.println("Connexion fermée.");
 			}
 		} catch (SQLException e) {
