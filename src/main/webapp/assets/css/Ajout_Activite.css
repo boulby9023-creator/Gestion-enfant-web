@@ -287,7 +287,7 @@ textarea{
  }
 
  .annuler{
-    width: 250px;
+    width: 230px;
     padding: 10px 20px;
     border: 2px solid #2E9E3E;
     border-radius: 12px;
@@ -466,3 +466,5 @@ textarea{
         font-size: 20px;
     }
 }
+
+

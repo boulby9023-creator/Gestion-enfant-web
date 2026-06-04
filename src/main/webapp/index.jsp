@@ -72,7 +72,8 @@
 
 				</ul>
 
-				<a href="#" class="btn btn-login me-2"> Connexion </a> <a href="#"
+				<a  href="${pageContext.request.contextPath}/Connexion" class="btn btn-login me-2"> Connexion </a> 
+				<a href="${pageContext.request.contextPath}/inscription"
 					class="btn btn-register"> Inscription </a>
 
 			</div>
@@ -93,7 +94,7 @@
 						corporel des enfants.</p>
 					<div class="mt-4">
 
-						<a href="#" class="btn btn-main me-3"> Commencer gratuitement
+						<a href="${pageContext.request.contextPath}/inscription" class="btn btn-main me-3"> Commencer gratuitement
 						</a> <a href="#" class="btn btn-outline-custom"> Découvrir les
 							fonctionnalités </a>
 

@@ -18,20 +18,19 @@
             </div>
             <div class="menu">
                 
-                    <div class="icon"><img src="${pageContext.request.contextPath}/assets/images/icon_dashboard.png" alt="icon pour home"><a href="#">Dashboard</a></div>
+                    <div class="icon"><img src="${pageContext.request.contextPath}/assets/images/icon_dashboard.png" alt="icon pour home"><a href="${pageContext.request.contextPath}/servlet">Dashboard</a></div>
                     <br>
-                    <div class="icon"><img src="${pageContext.request.contextPath}/assets/images/icon_exercice.png" alt="icon pour exercice"><a href="#">Gestion des exercices</a></div>
+                    <div class="icon"><img src="${pageContext.request.contextPath}/assets/images/icon_exercice.png" alt="icon pour exercice"><a href="${pageContext.request.contextPath}/ServletExercice">Gestion des exercices</a></div>
                     <br>
-                    <div class="icon"><img src="${pageContext.request.contextPath}/assets/images/icon_quiz.png" alt="icon pour quiz"><a href="#">Gestion des quiz</a></div>
+                    <div class="icon"><img src="${pageContext.request.contextPath}/assets/images/icon_quiz.png" alt="icon pour quiz"><a href="${pageContext.request.contextPath}/ServletQuiz">Gestion des quiz</a></div>
                     <br>
-                    <div class="icon"><img src="${pageContext.request.contextPath}/assets/images/icon_jeux.png" alt="icon pour jeux"><a href="#">Gestion des jeux</a></div>
+                    <div class="icon"><img src="${pageContext.request.contextPath}/assets/images/icon_jeux.png" alt="icon pour jeux"><a href="${pageContext.request.contextPath}/ServletJeu">Gestion des jeux</a></div>
                     <br>
-                    <div class="icon"><img src="${pageContext.request.contextPath}/assets/images/icon_user.png" alt="icon pour utilisateur"><a href="#">Gestion des utilisateurs</a></div>
+                    <div class="icon"><img src="${pageContext.request.contextPath}/assets/images/icon_user.png" alt="icon pour utilisateur"><a href="${pageContext.request.contextPath}/ServletAjouterUtilisateurs">Gestion des utilisateurs</a></div>
                     <br>
                     <br>
                     <div class="icon_para"><img src="${pageContext.request.contextPath}/assets/images/icon_para.png" alt="icon pour paramètre"><a href="#">Paramètres</a></div>
-                    <div class="icon_deconn"><img src="${pageContext.request.contextPath}/assets/images/icon_out.png" alt="icon pour deconnexion"><a href="#">Déconnexion</a></div>
-                
+                    <div class="icon_deconn"><img src="${pageContext.request.contextPath}/assets/images/icon_out.png" alt="icon pour deconnexion"><a href="${pageContext.request.contextPath}/Home">Déconnexion</a></div>
             </div>
           </aside>
           <!-- contenu -->
@@ -56,7 +55,7 @@
              <p class="champ">* : Champs obligatoires</p>
             <div class="formulaire">
                <div class="cote_gauche">
-                  <form action="pageContext.request.contextPath}/Ajout_Activite" method="post" enctype="multipart/form-data" >
+                  <form action="${pageContext.request.contextPath}/Ajout_Activite" method="post" enctype="multipart/form-data" >
                      <div class="form">
                      <label for="" class="label_gauche">Titre de l'activité *</label>
                      <input type="text" name = "titre_Activite" placeholder="Ex: Jeu de mémoire" required>
@@ -82,9 +81,8 @@
                         <label for="" class="label_gauche">Type d'activité *</label>
                         <select id="select" name="type_activite" required>
                           <option value="">Sélectionnez un type</option>
-                          <option value="Congnitif">Cognitif</option>
+                          <option value="Cognitif">Cognitif</option>
                           <option value="Intellectuel">Intellectuel</option>
-                          <option value="Emotionnel">émotionnel et mental</option>
                         </select>
                       </div>
                       <div class="form">
