@@ -1,3 +1,7 @@
+<%@page import="java.util.List"%>
+<%@page import="com.denkolochi.model.Utilisateur"%>
+<%@ page language="java" %>
+<% Utilisateur us = (Utilisateur)request.getAttribute("us"); %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -273,7 +277,7 @@ div .photo-profil{
 }
 
 .btn-submit:hover {
-    background-color: #218838;
+    background-color: orange;
 }
 
 </style>
@@ -337,41 +341,33 @@ div .photo-profil{
             <div class="form-section">
                 <div class="section-badge">Gestion des Utilisateurs</div>
                 
-                <form class="form-grid" onsubmit="event.preventDefault();">
+                <form class="form-grid" action="ServletModifier" method="post">
+                	<input type="hidden" name = "id" value = "<%= us.getId() %>">
                     <div class="form-group">
                         <label>Nom</label>
-                        <input type="text" placeholder="Veuillez saisir le nom de l'utilisateur">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" placeholder="Veuillez saisir le email de l'utilisateur">
+                        <input type="text" name = "nom" value="<%= us.getNom() %>" placeholder="Veuillez saisir le nom de l'utilisateur">
                     </div>
                     
                     <div class="form-group">
                         <label>Prenom</label>
-                        <input type="text" placeholder="Veuillez saisir le prenom de l'utilisateur">
+                        <input type="text" name = "prenom" value="<%= us.getPrenom() %>" placeholder="Veuillez saisir le email de l'utilisateur">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name = "email" value="<%= us.getMail() %>" placeholder="Veuillez saisir le prenom de l'utilisateur">
                     </div>
                     
                     <div class="form-group">
                         <label>Telephone</label>
-                        <input type="tel" placeholder="Veuillez saisir le numero de telephone de l'utilisateur">
+                        <input type="tel" name = "tel" value="<%= us.getTel() %>" placeholder="Veuillez saisir le numero de telephone de l'utilisateur">
                     </div>
                     
-                    <div class="form-group">
-                        <label>Mot de Passe</label>
-                        <input type="password" placeholder="Veuillez saisir le mot de passe de l'utilisateur">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Role</label>
-                        <input type="text" placeholder="Veuillez saisir le role de l'utilisateur">
-                    </div>
+                    <div class="form-actions">
+                    	<button type="submit" class="btn-submit">Modifier</button>
+                	</div>
                 </form>
 
-                <div class="form-actions">
-                    <button type="submit" class="btn-submit">Modifier</button>
-                </div>
             </div>
 
         </main>
