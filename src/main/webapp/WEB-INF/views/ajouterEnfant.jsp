@@ -48,60 +48,50 @@
    
    
    
-   <form>
-  <div class="row mb-4">
-    <div class="col">
-      <div data-mdb-input-init class="form-outline">
-          <label class="form-label" for="nom">Nom de l'enfant :</label>
-          <input  class="form-control"  type="text" id="nom" name="nom" required>
+  <div class="container mt-4">
+  <div class="form-card p-4 shadow rounded bg-white">
+    <h3 class="text-center mb-4">Ajouter un enfant</h3>
+    <form action="/ajouter-enfant" method="post">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <input type="text" class="form-control" placeholder="Entrer le nom" name="nom" required>
+        </div>
+        <div class="col-md-6">
+          <input type="date" class="form-control" placeholder="Entrer la date de naissance" name="date_naissance" required>
+        </div>
       </div>
-    </div>
-    <div class="col">
-      <div data-mdb-input-init class="form-outline">
-        
-        <label class="form-label" for="prenom">Prénom de l'enfant :</label>
-    <input  class="form-control "  type="text" id="prenom" name="prenom" required>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <input type="text" class="form-control" placeholder="Entrer le prénom" name="prenom" required>
+        </div>
+        <div class="col-md-6 d-flex align-items-center justify-content-around">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="garcon" name="sexe" value="Garçon">
+            <label class="form-check-label" for="garcon">Garçon</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="fille" name="sexe" value="Fille">
+            <label class="form-check-label" for="fille">Fille</label>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <input type="number" class="form-control" placeholder="Entrer le poids de l'enfant" name="poids" step="0.1" required>
+        </div>
+        <div class="col-md-6">
+          <input type="number" class="form-control" placeholder="Entrer la taille de l'enfant" name="taille" required>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-success px-5">Ajouter</button>
+      </div>
+    </form>
   </div>
-
-  <div data-mdb-input-init class="form-outline mb-4">
-   
-     <label class="form-label" for="dateNaissance">Date de naissance :</label>
-    <input  class="form-control"  type="date" id="dateNaissance" name="dateNaissance" required>
-  </div>
-
-
- 
-
-  <div class="form-check d-flex justify-content-center mb-4">
-    <label  class="form-label">Sexe :</label>
-  <div>
-    <label class="form-check-label" for="garcon">Garçon</label>
-    <input class="form-check-input me-2" type="checkbox" id="garcon" name="sexe" value="garcon">
-  </div>
-  <div>
-   <input  class="form-check-input me-2" type="checkbox" id="fille" name="sexe" value="fille">
-    <label class="form-check-label" for="fille">Fille</label>
-  </div>
-   
-
- 
-  </div>
-  
-  <!-- Poids -->
-    <label for="poids">Poids (kg) :</label>
-    <input  class="form-control"  type="number" id="poids" name="poids" step="0.1" required>
-
-    <!-- Taille -->
-    <label for="taille">Taille (cm) :</label>
-    <input  class="form-control"  type="number" id="taille" name="taille" required>
-
-    <!-- Bouton de soumission -->
-    <button type="submit">Enregistrer</button>
-</form>
-   
-   
+</div>
 
 </body>
 </html>
