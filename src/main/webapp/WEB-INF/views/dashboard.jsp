@@ -1,5 +1,6 @@
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<% List<com.denkolochi.model.Enfant> enfants = (List<com.denkolochi.model.Enfant>) request.getAttribute("enfants"); %>
 
 <!DOCTYPE html>
 
@@ -125,7 +126,7 @@
 
         <div>
 
-            <h2>Bonjour Parent A </h2>
+            <h2>Bonjour ${parent.nom} ${parent.prenom } </h2>
 
             <p>
                 Bienvenue sur votre espace de suivi.
@@ -207,9 +208,16 @@
 
     </div>
 
-    <!-- MES ENFANTS -->
+   <% if(enfants == null | enfants.isEmpty())  {%>
+    <div class="section-card mt-4 d-flex justify-content-center fs-2">
+   Vous n'avez pas encore ajouter d'enfants 
+    
+    </div>
+    
+    <% }   else {%>
+    
+     <div class="section-card mt-4">
 
-    <div class="section-card mt-4">
 
         <div class="section-header">
 
@@ -233,7 +241,7 @@
         <div class="row g-4 mt-2">
         
         <%
-    List<com.denkolochi.model.Enfant> enfants = (List<com.denkolochi.model.Enfant>) request.getAttribute("enfants");
+   
     if (enfants != null) {
     	int count = 0;
         for (com.denkolochi.model.Enfant e : enfants) {
@@ -261,7 +269,10 @@
  count++;
         }
     }
+    
+   
 %>
+
         
       
 
@@ -269,7 +280,10 @@
         </div>
 
     </div>
+    <%} %>
 
+
+   
     <!-- RECOMMANDATIONS -->
 
     <div class="section-card mt-4">

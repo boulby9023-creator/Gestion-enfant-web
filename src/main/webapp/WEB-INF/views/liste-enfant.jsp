@@ -1,6 +1,7 @@
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-
+<%    List<com.denkolochi.model.Enfant> enfants = (List<com.denkolochi.model.Enfant>) request.getAttribute("enfants");
+ %>
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -157,7 +158,8 @@
 
 				</div>
 
-				<!-- LISTE DES ENFANTS -->
+		
+    
 				<div class="mt-5">
 
 					<div class="d-flex justify-content-between align-items-center mb-4">
@@ -173,13 +175,20 @@
 						</a>
 
 					</div>
+					
+		 <% if(enfants == null | enfants.isEmpty())  {%>
+					   <div class="section-card mt-4 d-flex justify-content-center fs-2">
+					   Vous n'avez pas encore ajouter d'enfants 
+					    
+					    </div>
+    
+    <% }   else {%> 
 
 					<div class="row g-4">
 
 						<!-- ENFANT 1 -->
 						
 						    <%
-    List<com.denkolochi.model.Enfant> enfants = (List<com.denkolochi.model.Enfant>) request.getAttribute("enfants");
     if (enfants != null) {
     	int count = 0;
         for (com.denkolochi.model.Enfant e : enfants) {
@@ -238,6 +247,8 @@
 
 					</div>
 
+				<%} %>
+				
 				</div>
 
 

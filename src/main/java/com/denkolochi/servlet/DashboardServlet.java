@@ -27,12 +27,12 @@ public class DashboardServlet extends HttpServlet {
     	
     	  ImplParentDAO parentDao = new ImplParentDAO();
     	  ImplReponseEnfantDAO reponseEnfantDao = new ImplReponseEnfantDAO();
-          Parent parent = parentDao.getParentById(3); 
+          Parent parent = parentDao.getParentById(1); 
   
           request.setAttribute("parent", parent);
           request.setAttribute("enfants", parent.getEnfants());
           request.setAttribute("nbEnfants", parent.getEnfants().size());
-          request.setAttribute("nb_quiz_realises",reponseEnfantDao.getNombreQuizByParentId(3) );
+          request.setAttribute("nb_quiz_realises",reponseEnfantDao.getNombreQuizByParentId(1) );
          
 
 

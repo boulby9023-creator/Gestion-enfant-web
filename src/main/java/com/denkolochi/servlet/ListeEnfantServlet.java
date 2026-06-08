@@ -24,7 +24,7 @@ public class ListeEnfantServlet extends HttpServlet {
     	
     	  ImplParentDAO parentDao = new ImplParentDAO();
     	  ImplReponseEnfantDAO reponseEnfantDao = new ImplReponseEnfantDAO();
-          Parent parent = parentDao.getParentById(3); 
+          Parent parent = parentDao.getParentById(1); 
   
           request.setAttribute("parent", parent);
           request.setAttribute("enfants", parent.getEnfants());
