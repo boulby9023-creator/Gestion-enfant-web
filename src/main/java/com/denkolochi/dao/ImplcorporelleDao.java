@@ -13,32 +13,32 @@ public class ImplcorporelleDao implements Repository<Corporelle, Integer> {
 
 
     @Override
-    public void save( Corporelle entity) {
- 
+    public void save(Corporelle entity) {
+        String sql = "INSERT INTO corporelles (id_enfant, poids, taille, imc, date_enregistrement) "
+                   + "VALUES (?, ?, ?, ?, ?)";
 
-		String sql = "INSERT INTO corporelles VALUES (?,?,?,?,?,?)";
-		try (PreparedStatement pont = con.prepareStatement(sql)) {
-			pont.setNull(1, java.sql.Types.INTEGER);
-			pont.setInt(2, entity.getId_enfant());
-			pont.setDouble(3, entity.getPoids());
-			pont.setDouble(4, entity.getTaille());
-			pont.setDouble(5, entity.getImc());
-			pont.setDate(6,
-					entity.getDate_mesure() != null ? new java.sql.Date(entity.getDate_mesure().getTime()) : null);
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setInt(1, entity.getId_enfant());
+            ps.setDouble(2, entity.getPoids());
+            ps.setDouble(3, entity.getTaille());
+            ps.setDouble(4, entity.getImc());
+            ps.setDate(5, entity.getDate_mesure() != null 
+                            ? new java.sql.Date(entity.getDate_mesure().getTime()) 
+                            : new java.sql.Date(System.currentTimeMillis()));
 
-			int b = pont.executeUpdate();
-			if (b > 0) {
-				System.out.println("Capacite corporelle inserer avec succès");
-			}
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                System.out.println("✅ Mesure corporelle insérée avec succès");
+            }
 
-			con.close();
-
-		} catch (SQLException e) {
-			System.err.println("Problème d'insertion de corporelle");
-			System.err.println("Erreur sql: " + e.getSQLState());
-			System.err.println("Erreur message: " + e.getMessage());
-		}
-	}
+        } catch (SQLException e) {
+            System.err.println("❌ Erreur lors de l'insertion des mesures corporelles");
+            System.err.println("SQL State : " + e.getSQLState());
+            System.err.println("Message   : " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
 	@Override
 	public Corporelle findById(Integer id) {

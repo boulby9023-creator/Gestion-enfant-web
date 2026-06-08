@@ -51,7 +51,7 @@
   <div class="container mt-4">
   <div class="form-card p-4 shadow rounded bg-white">
     <h3 class="text-center mb-4">Ajouter un enfant</h3>
-    <form action="/ajouter-enfant" method="post">
+    <form action="${pageContext.request.contextPath}/ajouterEnfant" method="post">
       <div class="row mb-3">
         <div class="col-md-6">
           <input type="text" class="form-control" placeholder="Entrer le nom" name="nom" required>

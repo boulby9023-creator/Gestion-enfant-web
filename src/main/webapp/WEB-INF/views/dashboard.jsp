@@ -10,7 +10,8 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<link rel="shortcut icon" href="assets/images/iconedenkolochi.png"
+	type="image/x-icon">
 <title>DenKɔlɔsi - Dashboard Parent</title>
 
 <link
@@ -104,7 +105,7 @@
 
     <div class="logout">
 
-        <a href="#">
+        <a href="<%=request.getContextPath()%>/deconnexion">
 
             <i class="bi bi-box-arrow-right"></i>
 
@@ -134,15 +135,7 @@
 
         </div>
 
-        <div class="user-box">
-
-            <img
-                src="${pageContext.request.contextPath}/assets/images/image10.png"
-                alt="Parent">
-
-            <span>Parent A</span>
-
-        </div>
+       
 
     </div>
 

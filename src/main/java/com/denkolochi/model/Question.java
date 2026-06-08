@@ -8,7 +8,7 @@ public class Question {
 	private int delai_max;
 	private int score;
 	private int id_capacite;
-
+	
 	private List<Option> options;
 
 	public Question() {
@@ -22,20 +22,16 @@ public class Question {
 		this.id_capacite = id_capacite;
 	}
 
-		public void setOptions(List<Option> options) {
-		this.options = options;
-	}
-
-	public List<Option> getOptions() {
-	    return options;
-	}
-
 	public int getId_questions() {
 		return id_questions;
 	}
 
 	public void setId_questions(int id_questions) {
 		this.id_questions = id_questions;
+	}
+
+	public void setOptions(List<Option> options) {
+		this.options = options;
 	}
 
 	public String getEnonce() {
@@ -68,6 +64,10 @@ public class Question {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+	
+	public List<Option> getOptions() {
+	    return options;
 	}
 
 	@Override

@@ -5,12 +5,14 @@ import java.io.IOException;
 import com.denkolochi.dao.ImplParentDAO;
 import com.denkolochi.dao.ImplReponseEnfantDAO;
 import com.denkolochi.model.Parent;
+import com.denkolochi.model.Utilisateur;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/liste-enfant")
 public class ListeEnfantServlet extends HttpServlet {
@@ -22,15 +24,28 @@ public class ListeEnfantServlet extends HttpServlet {
                          HttpServletResponse response)
             throws ServletException, IOException {
     	
-    	  ImplParentDAO parentDao = new ImplParentDAO();
-    	  ImplReponseEnfantDAO reponseEnfantDao = new ImplReponseEnfantDAO();
-          Parent parent = parentDao.getParentById(1); 
+	HttpSession session = request.getSession();
+    	
+    	if (session == null || session.getAttribute("utilisateurConnecte") == null) {
+            response.sendRedirect("connexion"); 
+            return;
+        }
+    	
+    	ImplParentDAO parentDao = new ImplParentDAO();
+    	ImplReponseEnfantDAO reponseEnfantDao = new ImplReponseEnfantDAO();
+    	
+           Utilisateur utilisateurConnecte = (Utilisateur) session.getAttribute("utilisateurConnecte");
+           
+           Parent parent = parentDao.findById(utilisateurConnecte.getId()); 
+           
+           request.setAttribute("parent", parent);
+           request.setAttribute("enfants", parent.getEnfants());
+           request.setAttribute("nbEnfants", parent.getEnfants().size());
+           request.setAttribute("nb_quiz_realises",reponseEnfantDao.getNombreQuizByParentId(utilisateurConnecte.getId()) );
+    	
+    	 
   
-          request.setAttribute("parent", parent);
-          request.setAttribute("enfants", parent.getEnfants());
-          request.setAttribute("nbEnfants", parent.getEnfants().size());
-          request.setAttribute("nb_quiz_realises",reponseEnfantDao.getNombreQuizByParentId(3) );
-
+         
         request.getRequestDispatcher(
                 "/WEB-INF/views/liste-enfant.jsp")
                 .forward(request, response);

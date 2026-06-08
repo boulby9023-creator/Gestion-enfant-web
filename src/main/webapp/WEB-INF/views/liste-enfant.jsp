@@ -64,10 +64,13 @@
 								class="bi bi-gear"></i> Paramètres
 						</a></li>
 
-						<li class="nav-item mt-5"><a href="#"
-							class="nav-link text-danger"> <i
-								class="bi bi-box-arrow-right"></i> Déconnexion
-						</a></li>
+						<li class="nav-item mt-5"><a href="<%=request.getContextPath()%>/deconnexion">
+
+            <i class="bi bi-box-arrow-right"></i>
+
+            Déconnexion
+
+        </a></li>
 
 					</ul>
 
@@ -88,13 +91,7 @@
 							enfants</p>
 					</div>
 
-					<div class="parent-box">
-
-						<img
-							src="${pageContext.request.contextPath}/assets/images/image10.png"
-							alt="Parent"> <span>Parent A</span>
-
-					</div>
+					
 
 				</div>
 
@@ -170,7 +167,7 @@
 								consulter son suivi.</p>
 						</div>
 
-						<a href="#" class="btn btn-success"> <i
+						<a href="${pageContext.request.contextPath}/ajouterEnfant" class="btn btn-success"> <i
 							class="bi bi-plus-circle me-2"></i> Ajouter un enfant
 						</a>
 
@@ -225,9 +222,9 @@
 											<i class="bi bi-pencil-square"></i> Modifier
 										</button>
 
-										<button class="btn btn-danger">
+										<a href="<%=request.getContextPath()%>/delete?id=<%= e.getId() %>" class="btn btn-danger ">
 											<i class="bi bi-trash"></i> Supprimer
-										</button>
+										</a>
 
 									</div>
 

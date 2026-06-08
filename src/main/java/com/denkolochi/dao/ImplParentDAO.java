@@ -57,7 +57,7 @@ public class ImplParentDAO implements Repository<Parent, Integer> {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'update'");
 	}
-	public Parent getParentById(int idParent) {
+	public Parent findById(int idParent) {
         Parent parent = null;
         try  {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Utilisateurs WHERE id = ?");

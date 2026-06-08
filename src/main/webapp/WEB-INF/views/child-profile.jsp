@@ -86,13 +86,7 @@
 
 					</div>
 
-					<div class="parent-box">
-
-						<img
-							src="${pageContext.request.contextPath}/assets/images/image10.png"
-							alt="Parent"> <span>Parent A</span>
-
-					</div>
+					
 
 				</div>
 
@@ -108,11 +102,11 @@
 
 						<div>
 
-							<h3>Awa Traoré</h3>
+							<h3>${enfant.prenom } ${enfant.nom }</h3>
 
-							<p class="text-muted mb-1">5 ans • Maternelle</p>
+							<p class="text-muted mb-1">${enfant.date_naissance} • ${enfant.sexe }</p>
 
-							<span class="badge bg-success"> Suivi actif </span>
+							
 
 						</div>
 
