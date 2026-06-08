@@ -72,7 +72,7 @@
 
 				</ul>
 
-				<a  href="${pageContext.request.contextPath}/Connexion" class="btn btn-login me-2"> Connexion </a> 
+				<a  href="${pageContext.request.contextPath}/connexion" class="btn btn-login me-2"> Connexion </a> 
 				<a href="${pageContext.request.contextPath}/inscription"
 					class="btn btn-register"> Inscription </a>
 
