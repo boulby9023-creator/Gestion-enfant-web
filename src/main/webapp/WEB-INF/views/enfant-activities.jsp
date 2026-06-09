@@ -124,156 +124,20 @@
 
 				<div class="profile-menu">
 
-					<a href="${pageContext.request.contextPath}/child-profile" class="active"> Vue d'ensemble </a> 
-					<a href="${pageContext.request.contextPath}/enfant-activities"> Activités </a> <a href="#"> Croissance </a> <a href="#"> Suivi &
-						progrès </a> <a href="#"> Recommandations </a>
+					<a href="#" > Vue d'ensemble </a> 
+					<a href="#" class="active"> Activités </a>
+					<a href="#"> Croissance </a> 
+					<a href="#"> Suivi & progrès </a> <a href="#"> Recommandations </a>
 
 				</div>
 
 				<!-- STATISTIQUES -->
 
-				<div class="row g-4 mt-2">
+				
 
-					<div class="col-lg-3">
+				
 
-						<div class="score-card green">
-
-							<h6>Cognitif</h6>
-
-							<h2>85%</h2>
-
-							<span>Excellent</span>
-
-						</div>
-
-					</div>
-
-					<div class="col-lg-3">
-
-						<div class="score-card orange">
-
-							<h6>Intellectuel</h6>
-
-							<h2>78%</h2>
-
-							<span>Bon</span>
-
-						</div>
-
-					</div>
-
-					<div class="col-lg-3">
-
-						<div class="score-card blue">
-
-							<h6>Corporel</h6>
-
-							<h2>82%</h2>
-
-							<span>Bon</span>
-
-						</div>
-
-					</div>
-
-					<div class="col-lg-3">
-
-						<div class="score-card red">
-
-							<h6>Émotionnel</h6>
-
-							<h2>90%</h2>
-
-							<span>Excellent</span>
-
-						</div>
-
-					</div>
-
-				</div>
-
-				<!-- ACTIVITES -->
-
-				<div class="card border-0 shadow-sm mt-4">
-
-					<div class="card-body">
-
-						<div class="d-flex justify-content-between mb-3">
-
-							<h5>Activités récentes</h5>
-
-							<a href="#"> Voir tout </a>
-
-						</div>
-
-						<table class="table">
-
-							<thead>
-
-								<tr>
-
-									<th>Activité</th>
-									<th>Date</th>
-									<th>Score</th>
-
-								</tr>
-
-							</thead>
-
-							<tbody>
-
-								<tr>
-
-									<td>Quiz mémoire</td>
-									<td>20 Avril 2026</td>
-									<td><span class="badge bg-success"> 85% </span></td>
-
-								</tr>
-
-								<tr>
-
-									<td>Lecture guidée</td>
-									<td>18 Avril 2026</td>
-									<td><span class="badge bg-primary"> 90% </span></td>
-
-								</tr>
-
-								<tr>
-
-									<td>Logique</td>
-									<td>15 Avril 2026</td>
-									<td><span class="badge bg-warning"> 75% </span></td>
-
-								</tr>
-
-							</tbody>
-
-						</table>
-
-					</div>
-
-				</div>
-
-				<!-- RECOMMANDATIONS -->
-
-				<div class="card border-0 shadow-sm mt-4">
-
-					<div class="card-body">
-
-						<h5 class="mb-4">Recommandations</h5>
-
-						<div class="alert alert-success">Encourager 15 minutes de
-							lecture chaque jour.</div>
-
-						<div class="alert alert-warning">Renforcer les exercices de
-							logique.</div>
-
-						<div class="alert alert-info">Maintenir les activités
-							physiques.</div>
-
-					</div>
-
-				</div>
+				
 
 			</main>
 

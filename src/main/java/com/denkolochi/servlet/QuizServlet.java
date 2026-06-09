@@ -26,150 +26,103 @@ public class QuizServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
+    	  HttpSession session = request.getSession();
+          String action = request.getParameter("action");
+          String idQuizParam = request.getParameter("id_quiz");
 
-        String action = request.getParameter("action");
-        String idParam = request.getParameter("id_quiz");
+          if ("restart".equals(action) || session.getAttribute("quiz") == null) {
+              int idQuiz = Integer.parseInt(idQuizParam != null ? idQuizParam : "1"); // ou gérer l'erreur
 
-        boolean restart = "restart".equals(action);
+              Quiz quiz = chargerQuizComplet(idQuiz);
+              if (quiz == null) {
+                  response.sendRedirect(request.getContextPath() + "/parent/dashboard");
+                  return;
+              }
 
-        Quiz quiz = (Quiz) session.getAttribute("quiz");
+              session.setAttribute("quiz", quiz);
+              session.setAttribute("currentIndex", 0);
+              session.setAttribute("score", 0);
+              session.setAttribute("reponsesUtilisateur", initialiserReponses(quiz.getQuestions().size()));
+          }
 
-        if (idParam != null || quiz == null || restart) {
+          request.getRequestDispatcher("/WEB-INF/views/jeu_quiz.jsp").forward(request, response);
+      }
 
-            int idQuiz = (idParam != null) ? Integer.parseInt(idParam) : 0;
+      protected void doPost(HttpServletRequest request, HttpServletResponse response)
+              throws ServletException, IOException {
 
-            Quiz newQuiz = chargerQuizDepuisDonnees(idQuiz);
+          HttpSession session = request.getSession();
+          Quiz quiz = (Quiz) session.getAttribute("quiz");
+          Integer currentIndex = (Integer) session.getAttribute("currentIndex");
+          List<Integer> reponsesUtilisateur = (List<Integer>) session.getAttribute("reponsesUtilisateur");
 
-//            if (newQuiz == null) {
-//                response.sendRedirect(request.getContextPath() + "/test.jsp");
-//                return;
-//            }
+          if (quiz == null || currentIndex == null) {
+              response.sendRedirect(request.getContextPath() + "/QuizServlet");
+              return;
+          }
 
-            session.setAttribute("quiz", newQuiz);
-            session.setAttribute("currentIndex", 0);
-            session.setAttribute("score", 0);
-            session.setAttribute("bonneReponses", 0);
+          // 1. Enregistrer la réponse si présente
+          String reponseStr = request.getParameter("reponse");
+          if (reponseStr != null) {
+              int choix = Integer.parseInt(reponseStr);
+              reponsesUtilisateur.set(currentIndex, choix);
+          }
 
-            List<Integer> reponses = new ArrayList<>();
-            for (int i = 0; i < newQuiz.getQuestions().size(); i++) {
-                reponses.add(-1);
-            }
+          // 2. Navigation
+          String nav = request.getParameter("nav");
+          int total = quiz.getQuestions().size();
 
-            session.setAttribute("reponsesUtilisateur", reponses);
-        }
-        
-        request.getRequestDispatcher("/WEB-INF/views/jeu_quiz.jsp").forward(request, response);
-    }
-    
-    
+          if ("suivant".equals(nav) && currentIndex < total - 1) {
+              currentIndex++;
+          } else if ("precedent".equals(nav) && currentIndex > 0) {
+              currentIndex--;
+          } else if ("terminer".equals(nav)) {
+              // Calcul final du score
+              int scoreFinal = calculerScoreFinal(quiz, reponsesUtilisateur);
+              session.setAttribute("score", scoreFinal);
+              session.setAttribute("quizTermine", true);
+              response.sendRedirect(request.getContextPath() + "/ResultatQuizServlet"); // ou même page avec résultat
+              return;
+          }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Quiz quiz = (Quiz) session.getAttribute("quiz");
-        int currentIndex = (int) session.getAttribute("currentIndex");
-        int bonneReponses = (int) session.getAttribute("bonneReponses");
-        List<Integer> reponses = (List<Integer>) session.getAttribute("reponsesUtilisateur");
+          session.setAttribute("currentIndex", currentIndex);
+          session.setAttribute("reponsesUtilisateur", reponsesUtilisateur);
 
-        if (quiz == null) {
-            response.sendRedirect(request.getContextPath() + "/QuizServlet");
-            return;
-        }
+          response.sendRedirect(request.getContextPath() + "/QuizServlet");
+      }
 
-        String reponseChoisie = request.getParameter("reponse");
-        if (reponseChoisie != null) {
-            reponses.set(currentIndex, Integer.parseInt(reponseChoisie));
-        }
+      private int calculerScoreFinal(Quiz quiz, List<Integer> reponses) {
+          int score = 0;
+          List<Question> questions = quiz.getQuestions();
 
-        String action = request.getParameter("nav");
-        if ("suivant".equals(action) && currentIndex < quiz.getQuestions().size() - 1) {
-            currentIndex++;
-        } else if ("precedent".equals(action) && currentIndex > 0) {
-            currentIndex--;
-        }
+          for (int i = 0; i < questions.size(); i++) {
+              int indexReponse = reponses.get(i);
+              if (indexReponse != -1) {
+                  Option option = questions.get(i).getOptions().get(indexReponse);
+                  if (option.isEstCorrecte()) {
+                      // Tu peux mettre un score par question ou par capacité
+                      score += 10; // ou questions.get(i).getPoints() si tu ajoutes la colonne
+                  }
+              }
+          }
+          return score;
+      }
 
-        int scoreActuel = 0;
-        List<Question> listeQuestions = quiz.getQuestions();
-        for (int i = 0; i < listeQuestions.size(); i++) {
+      private List<Integer> initialiserReponses(int size) {
+          List<Integer> list = new ArrayList<>();
+          for (int i = 0; i < size; i++) list.add(-1);
+          return list;
+      }
 
-            int reponseUtilisateur = reponses.get(i);
+      private Quiz chargerQuizComplet(int idQuiz) {
+          QuizDao quizDao = new QuizDao();
+          ImplQuestionDAO questionDao = new ImplQuestionDAO();
 
-            System.out.println("Question " + i);
-            System.out.println("Réponse utilisateur = " + reponseUtilisateur);
-
-            if (reponseUtilisateur != -1) {
-
-                Option optionChoisie =
-                        listeQuestions.get(i)
-                                      .getOptions()
-                                      .get(reponseUtilisateur);
-
-                System.out.println("Option choisie = "
-                        + optionChoisie.getTexte());
-
-                System.out.println("Correcte ? "
-                        + optionChoisie.isEstCorrecte());
-
-                if (optionChoisie.isEstCorrecte()) {
-
-                    scoreActuel += listeQuestions.get(i).getScore();
-                    bonneReponses ++;
-                }
-            }
-        }
-        System.out.println("Score actuel = " + scoreActuel);
-        System.out.println("Score max = " + quiz.getScoreMax());
-
-        int scorePourcentage =
-                (quiz.getScoreMax() > 0)
-                ? (scoreActuel * 100) / quiz.getScoreMax()
-                : 0;
-
-        System.out.println("Pourcentage = " + scorePourcentage);
-        /*for (int i = 0; i < listeQuestions.size(); i++) {
-
-            int reponseUtilisateur = reponses.get(i);
-
-            if (reponseUtilisateur != -1) {
-
-                if (listeQuestions.get(i)
-                        .getOptions()
-                        .get(reponseUtilisateur)
-                        .isEstCorrecte()) {
-
-                    scoreActuel += listeQuestions.get(i).getScore();
-                }
-            }
-        }*/
-        
-       
-         scorePourcentage = (quiz.getScoreMax() > 0) ? (scoreActuel * 100) / quiz.getScoreMax() : 0;
-        //scorePourcentage = (quiz.getScoreMax() > 0) ? (bonneReponses * 100) / quiz.getScoreMax() : 0;
-
-        
-        session.setAttribute("currentIndex", currentIndex);
-        session.setAttribute("bonneReponses", bonneReponses);
-        session.setAttribute("reponsesUtilisateur", reponses);
-        session.setAttribute("score", scorePourcentage);
-
-        response.sendRedirect(request.getContextPath() + "/QuizServlet");
-    }
-
-    
-    private Quiz chargerQuizDepuisDonnees(int idQuiz) {
-        QuizDao quizDao = new QuizDao();
-        ImplQuestionDAO questionDao = new ImplQuestionDAO();
-
-        Quiz quiz = quizDao.findById(idQuiz);
-
-        if (quiz == null) {
-            return null;
-        }
-
-        List<Question> liste = questionDao.recuperationQuestionsByIdQuiz(idQuiz);
-        quiz.setQuestions(liste);
-
-        return quiz;
+          Quiz quiz = quizDao.findById(idQuiz);
+          if (quiz != null) {
+              quiz.setQuestions(questionDao.recuperationQuestionsByIdQuiz(idQuiz));
+          }
+          return quiz;
     }
 
 }
