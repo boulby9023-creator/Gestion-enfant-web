@@ -6,7 +6,7 @@ import main.java.Service.interfaces.UtilisateurInService;
 import main.java.enumeration.RoleEnum;
 
 public class main {
-
+    System.gc();
    public static void main(String[] args) {
     UtilisateurInService utilisateurInService = new  UtilisateurImplService();
     /*   Admins utl = new Admins();
