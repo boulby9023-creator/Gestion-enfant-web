@@ -32,12 +32,11 @@ public class QuizServlet extends HttpServlet {
 
           if ("restart".equals(action) || session.getAttribute("quiz") == null) {
               int idQuiz = Integer.parseInt(idQuizParam != null ? idQuizParam : "1"); // ou gérer l'erreur
-
               Quiz quiz = chargerQuizComplet(idQuiz);
-              if (quiz == null) {
-                  response.sendRedirect(request.getContextPath() + "/parent/dashboard");
-                  return;
-              }
+//              if (quiz == null) {
+//                  response.sendRedirect(request.getContextPath() + "/dashboard");
+//                  return;
+//              }
 
               session.setAttribute("quiz", quiz);
               session.setAttribute("currentIndex", 0);

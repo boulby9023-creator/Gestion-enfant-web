@@ -2,10 +2,13 @@ package com.denkolochi.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import com.denkolochi.configuration.ConnexionDB;
 import com.denkolochi.model.Corporelle;
+import com.denkolochi.model.Question;
 
 public class ImplcorporelleDao implements Repository<Corporelle, Integer> {
 	Connection con = ConnexionDB.getInstance().getconnection();
@@ -48,8 +51,9 @@ public class ImplcorporelleDao implements Repository<Corporelle, Integer> {
 
 	@Override
 	public List<Corporelle> findAll() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+		throw new UnsupportedOperationException("Unimplemented method 'findById'");
+
+	
 	}
 
 	@Override
@@ -62,5 +66,32 @@ public class ImplcorporelleDao implements Repository<Corporelle, Integer> {
 	public void update(Integer id, Corporelle entity) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
+	
+	public List<Corporelle> findAllByEnfant(Integer id) {
+	    List<Corporelle> corporelles = new ArrayList<>();
+	    String sql = "SELECT * FROM corporelles WHERE id_enfant = ?";
+
+	    try (PreparedStatement pont = con.prepareStatement(sql)) {
+	        pont.setInt(1, id);
+
+	        try (ResultSet rs = pont.executeQuery()) {
+	            while (rs.next()) {
+	                Corporelle corporelle = new Corporelle();
+	                corporelle.setId(rs.getInt("id"));
+	                corporelle.setId_enfant(rs.getInt("id_enfant"));
+	                corporelle.setPoids(rs.getFloat("poids"));
+	                corporelle.setTaille(rs.getFloat("taille"));
+	                corporelle.setImc(rs.getFloat("imc"));
+	                corporelle.setDate_mesure(rs.getDate("date_enregistrement"));
+	                corporelles.add(corporelle);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return corporelles;
+	}
+	
 
 }

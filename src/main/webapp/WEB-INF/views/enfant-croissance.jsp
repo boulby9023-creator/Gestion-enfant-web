@@ -1,12 +1,206 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+
 <!DOCTYPE html>
-<html>
+
+<html lang="fr">
+
 <head>
+
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Profil Enfant - DenKɔlɔsi</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/child-profile.css">
+
 </head>
+
 <body>
 
+	<div class="container-fluid">
+
+		<div class="row">
+
+			<!-- SIDEBAR -->
+			<aside class="col-lg-3 col-xl-2 sidebar p-0">
+
+				<div class="p-4">
+
+					<div class="logo text-center mb-5">
+
+						<a class="navbar-brand custom-brand" href="#"> <img
+							src="${pageContext.request.contextPath}/assets/brand/Group 39.svg"
+							width="60">
+						</a> <a class="navbar-brand custom-brand" href="#"> <img
+							src="${pageContext.request.contextPath}/assets/brand/logoName.svg"
+							width="120">
+						</a>
+
+					</div>
+
+					<ul class="nav flex-column">
+
+						<li class="nav-item mb-3"><a
+							href="${pageContext.request.contextPath}/dashboard"
+							class="nav-link"> <i class="bi bi-grid"></i> Dashboard
+						</a></li>
+
+						<li class="nav-item mb-3"><a href="#" class="nav-link active">
+								<i class="bi bi-people"></i> Mes enfants
+						</a></li>
+
+						<li class="nav-item mb-3"><a href="#" class="nav-link"> <i
+								class="bi bi-gear"></i> Paramètres
+						</a></li>
+
+						<li class="nav-item mt-5"><a href="#"
+							class="nav-link text-danger"> <i
+								class="bi bi-box-arrow-right"></i> Déconnexion
+						</a></li>
+
+					</ul>
+
+				</div>
+
+			</aside>
+
+			<!-- MAIN CONTENT -->
+			<main class="col-lg-9 col-xl-10 p-4">
+
+				<!-- HEADER -->
+				<div class="d-flex justify-content-between align-items-center mb-4">
+
+					<div class="flex">
+						<a href="${pageContext.request.contextPath}/liste-enfant"
+							class="btn btn-success"> <i class="bi bi-arrow-left me-2"></i>
+							Retour à la liste des enfants
+						</a>
+
+					</div>
+
+					
+
+				</div>
+
+				<!-- ENFANT -->
+
+				<div class="child-header">
+
+					<div class="d-flex align-items-center gap-4">
+
+						<img
+							src="${pageContext.request.contextPath}/assets/images/image10.png"
+							class="child-avatar">
+
+						<div>
+
+							<h3>${enfant.prenom } ${enfant.nom }</h3>
+
+							<p class="text-muted mb-1">${enfant.date_naissance} • ${enfant.sexe }</p>
+
+							
+
+						</div>
+
+					</div>
+
+					<button class="btn btn-light">
+
+						<i class="bi bi-three-dots-vertical"></i>
+
+					</button>
+
+				</div>
+
+				<!-- MENU INTERNE -->
+
+				<div class="profile-menu">
+
+					<a href="${pageContext.request.contextPath}/child-profile?id=${enfant.id}" > Vue d'ensemble </a> 
+					<a href="${pageContext.request.contextPath}/enfant-activities?id=${enfant.id}" > Activités </a>
+					<a href="${pageContext.request.contextPath}/enfant-croissance?id=${enfant.id}" class=active> Croissance </a>
+					<a href="${pageContext.request.contextPath}/enfant-progress?id=${enfant.id}"> Suivi & progrès </a> 
+					<a href="${pageContext.request.contextPath}/enfant-recommandations?id=${enfant.id}"> Recommandations </a>
+				</div>
+
+				<!-- CORPORELLES -->
+
+				
+		<%
+		    List<com.denkolochi.model.Corporelle> corporelles = 
+		        (List<com.denkolochi.model.Corporelle>) request.getAttribute("corporelles");
+		%>
+		
+		<div class="mt-5">
+		
+		<a href="${pageContext.request.contextPath}/ajoutercorpolle?idEnfant=${enfant.id}" class="btn btn-success mb-3 "> 
+		      <i class="bi bi-plus-circle me-2"></i> Ajouter 
+			</a>
+		    <div class="card shadow-sm border-0">
+		    
+		        <div class="card-header bg-success text-white">
+		            <h5 class="mb-0">Suivi corporel</h5>
+		        </div>
+		
+		        <div class="card-body p-0">
+		            <div class="table-responsive">
+		                <table class="table table-bordered table-hover text-center mb-0 align-middle">
+		                    <thead class="table-light">
+		                        <tr>
+		                            <th>Poids (kg)</th>
+		                            <th>Taille (cm)</th>
+		                            <th>IMC</th>
+		                            <th>Date</th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+		                        <%
+		                            if (corporelles != null && !corporelles.isEmpty()) {
+		                                for (com.denkolochi.model.Corporelle c : corporelles) {
+		                        %>
+		                        <tr>
+		                            <td><%= c.getPoids() %></td>
+		                            <td><%= c.getTaille() %></td>
+		                            <td><%= c.getImc() %></td>
+		                            <td><%= c.getDate_mesure() %></td>
+		                        </tr>
+		                        <%
+		                                }
+		                            } else {
+		                        %>
+		                        <tr>
+		                            <td colspan="4" class="text-muted py-4">
+		                                Aucune donnée corporelle disponible.
+		                            </td>
+		                        </tr>
+		                        <%
+		                            }
+		                        %>
+		                    </tbody>
+		                </table>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+						
+
+				
+
+			</main>
+
+		</div>
+
+	</div>
+
 </body>
+
 </html>

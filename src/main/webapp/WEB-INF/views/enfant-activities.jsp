@@ -124,18 +124,58 @@
 
 				<div class="profile-menu">
 
-					<a href="#" > Vue d'ensemble </a> 
-					<a href="#" class="active"> Activités </a>
-					<a href="#"> Croissance </a> 
-					<a href="#"> Suivi & progrès </a> <a href="#"> Recommandations </a>
-
+					<a href="${pageContext.request.contextPath}/child-profile?id=${enfant.id}" > Vue d'ensemble </a> 
+					<a href="${pageContext.request.contextPath}/enfant-activities?id=${enfant.id}" class="active"> Activités </a>
+					<a href="${pageContext.request.contextPath}/enfant-croissance?id=${enfant.id}"> Croissance </a>
+					<a href="${pageContext.request.contextPath}/enfant-progress?id=${enfant.id}"> Suivi & progrès </a> 
+					<a href="${pageContext.request.contextPath}/enfant-recommandations?id=${enfant.id}"> Recommandations </a>
 				</div>
 
-				<!-- STATISTIQUES -->
+				<!-- types activites -->
 
 				
 
-				
+				<div class="row g-3 mt-4">
+
+    <div class="col-12">
+        <div class="card border-0 shadow-sm position-relative type-card">
+            <div class="card-body d-flex align-items-center p-4">
+                <div class="icon-circle bg-primary text-white me-3">
+                    <i class="bi bi-puzzle-fill fs-3"></i>
+                </div>
+                <div>
+                    <h5 class="card-title mb-1 text-warning fw-bold">Développement cognitif </h5>
+                    <p class="card-text mb-0 text-dark fw-semibold">
+                        Des activités adaptées pour le développement cognitif de votre enfant
+                    </p>
+                </div>
+                <a href="${pageContext.request.contextPath}/quizType?type=Cognitif&idenfant=${enfant.id}"
+                   class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="card border-0 shadow-sm position-relative type-card">
+            <div class="card-body d-flex align-items-center p-4">
+                <div class="icon-circle bg-success text-white me-3">
+                    <i class="bi bi-emoji-smile-fill fs-3"></i>
+                </div>
+                <div>
+                    <h5 class="card-title mb-1 text-warning fw-bold">Développement  intellectuel</h5>
+                    <p class="card-text mb-0 text-dark fw-semibold">
+                        Des activités adaptées pour le développement  intellectuel de votre enfant
+                    </p>
+                </div>
+                <a href="${pageContext.request.contextPath}/quizType?type=Intellectuel&id=enfant${enfant.id}"
+                   class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+
+    
+
+</div>
 
 				
 

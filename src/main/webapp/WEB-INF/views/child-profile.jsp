@@ -124,9 +124,11 @@
 
 				<div class="profile-menu">
 
-					<a href="${pageContext.request.contextPath}/child-profile" class="active"> Vue d'ensemble </a> 
-					<a href="${pageContext.request.contextPath}/enfant-activities"> Activités </a> <a href="#"> Croissance </a> <a href="#"> Suivi &
-						progrès </a> <a href="#"> Recommandations </a>
+					<a href="${pageContext.request.contextPath}/child-profile?id=${enfant.id}" class="active"> Vue d'ensemble </a> 
+					<a href="${pageContext.request.contextPath}/enfant-activities?id=${enfant.id}"> Activités </a>
+					<a href="${pageContext.request.contextPath}/enfant-croissance?id=${enfant.id}"> Croissance </a>
+					<a href="${pageContext.request.contextPath}/enfant-progress?id=${enfant.id}"> Suivi & progrès </a> 
+					<a href="${pageContext.request.contextPath}/enfant-recommandations?id=${enfant.id}"> Recommandations </a>
 
 				</div>
 

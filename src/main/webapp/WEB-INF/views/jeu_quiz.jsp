@@ -14,7 +14,7 @@
     if (score == null) score = 0;
 
     if (quiz == null || quiz.getQuestions() == null) {
-        response.sendRedirect(request.getContextPath() + "/parent/dashboard.jsp");
+        response.sendRedirect(request.getContextPath() + "/dashboard.jsp");
         return;
     }
 %>
@@ -49,10 +49,10 @@
     <div class="container">
         <header>
             <div class="retour">
-                <a href="${pageContext.request.contextPath}/parent/dashboard.jsp">← Quitter le quiz</a>
+                <a href="${pageContext.request.contextPath}/dashboard">← Quitter le quiz</a>
             </div>
             <div>
-                <a href="${pageContext.request.contextPath}/QuizServlet?action=restart&id_quiz=<%= quiz.getIdQuiz() %>" 
+                <a href="${pageContext.request.contextPath}/QuizServlet?action=restart&id_quiz=${quiz.idQuiz}" 
                    style="text-decoration: none; padding: 8px 16px; background: #eab308; color: black; border-radius: 6px;">
                     Recommencer
                 </a>

@@ -17,7 +17,7 @@ import com.denkolochi.model.Utilisateur;
 /**
  * Servlet implementation class EnfantActivitesServlet
  */
-@WebServlet("/EnfantActivitesServlet")
+@WebServlet("/enfant-activities")
 public class EnfantActivitesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

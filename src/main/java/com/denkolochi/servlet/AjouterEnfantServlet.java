@@ -49,6 +49,7 @@ public class AjouterEnfantServlet extends HttpServlet {
 
         try {
             // Récupération des données du formulaire
+        	
             String nom = request.getParameter("nom");
             String prenom = request.getParameter("prenom");
             String dateNaissanceStr = request.getParameter("date_naissance");

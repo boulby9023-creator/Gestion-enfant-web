@@ -52,7 +52,8 @@ public class ChildProfileServlet extends HttpServlet {
         	}
 
            
-           request.setAttribute("enfant", enfant);          
+           request.setAttribute("enfant", enfant);   
+           request.setAttribute("idEnfant", idEnfant);  
           
     	
 
