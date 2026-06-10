@@ -1,6 +1,25 @@
 .idea
 .vscode
 .out
-
 .src/main/java/BD/ConnexionDB.java
 .src/main/java/BD/Connexion.java
+# Eclipse
+/.metadata/
+/.settings/
+/.project
+/.classpath
+
+# Build
+/bin/
+/target/
+/build/
+
+# Tomcat / Servers
+/Servers/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
