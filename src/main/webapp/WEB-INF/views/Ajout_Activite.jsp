@@ -55,6 +55,7 @@
              <p class="champ">* : Champs obligatoires</p>
             <div class="formulaire">
                <div class="cote_gauche">
+               
                   <form action="${pageContext.request.contextPath}/Ajout_Activite" method="post" enctype="multipart/form-data" >
                      <div class="form">
                      <label for="" class="label_gauche">Titre de l'activité *</label>
