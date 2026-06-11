@@ -12,7 +12,6 @@ public class ConnexionDB {
 
 	private ConnexionDB() {
 		try {
-			// Force le chargement du driver MySQL pour Tomcat
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			this.connection = DriverManager.getConnection(DbConstConfig.url, DbConstConfig.utilisateur,
@@ -50,7 +49,6 @@ public class ConnexionDB {
 			System.err.println("Erreur lors de la vérification de la connexion : " + e.getMessage());
 		}
 
-		// Si l'initialisation a échoué, on renvoie la connexion de la nouvelle instance
 		return (instance != null) ? instance.connection : null;
 	}
 
