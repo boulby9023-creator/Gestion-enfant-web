@@ -1,4 +1,6 @@
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<% List<com.denkolochi.model.Enfant> enfants = (List<com.denkolochi.model.Enfant>) request.getAttribute("enfants"); %>
 
 <!DOCTYPE html>
 
@@ -8,7 +10,8 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<link rel="shortcut icon" href="assets/images/iconedenkolochi.png"
+	type="image/x-icon">
 <title>DenKɔlɔsi - Dashboard Parent</title>
 
 <link
@@ -102,7 +105,7 @@
 
     <div class="logout">
 
-        <a href="#">
+        <a href="<%=request.getContextPath()%>/deconnexion">
 
             <i class="bi bi-box-arrow-right"></i>
 
@@ -124,7 +127,7 @@
 
         <div>
 
-            <h2>Bonjour Parent A </h2>
+            <h2>Bonjour ${parent.nom} ${parent.prenom } </h2>
 
             <p>
                 Bienvenue sur votre espace de suivi.
@@ -132,15 +135,7 @@
 
         </div>
 
-        <div class="user-box">
-
-            <img
-                src="${pageContext.request.contextPath}/assets/images/image10.png"
-                alt="Parent">
-
-            <span>Parent A</span>
-
-        </div>
+       
 
     </div>
 
@@ -154,7 +149,7 @@
 
                 <i class="bi bi-people-fill"></i>
 
-                <h3>2</h3>
+                <h3>${nbEnfants}</h3>
 
                 <p>Enfants suivis</p>
 
@@ -168,7 +163,7 @@
 
                 <i class="bi bi-clipboard-check-fill"></i>
 
-                <h3>24</h3>
+                <h3>${nb_quiz_realises}</h3>
 
                 <p>Activités réalisées</p>
 
@@ -206,9 +201,16 @@
 
     </div>
 
-    <!-- MES ENFANTS -->
+   <% if(enfants == null | enfants.isEmpty())  {%>
+    <div class="section-card mt-4 d-flex justify-content-center fs-2">
+   Vous n'avez pas encore ajouter d'enfants 
+    
+    </div>
+    
+    <% }   else {%>
+    
+     <div class="section-card mt-4">
 
-    <div class="section-card mt-4">
 
         <div class="section-header">
 
@@ -223,112 +225,58 @@
 
             </div>
 
-            <button class="btn btn-success">
-                Ajouter un enfant
-            </button>
+             <a href="<%=request.getContextPath()%>/liste-enfant" class="underline">
+                            Voir plus
+                        </a>
 
         </div>
 
         <div class="row g-4 mt-2">
-
+        
+        <%
+   
+    if (enfants != null) {
+    	int count = 0;
+        for (com.denkolochi.model.Enfant e : enfants) {
+        	 if (count >= 2) break;
+%>
             <div class="col-lg-6">
-
                 <div class="child-card">
-
                     <div class="child-info">
-
-                        <img
-                            src="${pageContext.request.contextPath}/assets/images/girl.png"
-                            alt="">
-
+                        <img src="<%=request.getContextPath()%>/assets/images/girl.png" alt="">
                         <div>
-
-                            <h5>Awa Traoré</h5>
-
-                            <p>9 ans • Primaire</p>
-
+                            <h5><%= e.getPrenom() %> <%= e.getNom() %></h5>
+                            <p><%= e.getDate_naissance() %> • <%= e.getSexe() %></p>
                         </div>
-
                     </div>
-
                     <div class="child-actions">
-
-                        <a href="${pageContext.request.contextPath}/child-profile"
-                           class="btn btn-success">
-
+                        <a href="<%=request.getContextPath()%>/child-profile?id=<%= e.getId() %>" class="btn btn-success">
                             Voir le profil
-
                         </a>
-
-                        <button class="btn btn-light">
-
-                            <i class="bi bi-pencil"></i>
-
-                        </button>
-
-                        <button class="btn btn-light">
-
-                            <i class="bi bi-three-dots-vertical"></i>
-
-                        </button>
-
+                        <button class="btn btn-light"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-light"><i class="bi bi-three-dots-vertical"></i></button>
                     </div>
-
                 </div>
-
             </div>
+<%
+ count++;
+        }
+    }
+    
+   
+%>
 
-            <div class="col-lg-6">
+        
+      
 
-                <div class="child-card">
-
-                    <div class="child-info">
-
-                        <img
-                            src="${pageContext.request.contextPath}/assets/images/boy.png"
-                            alt="">
-
-                        <div>
-
-                            <h5>Moussa Keita</h5>
-
-                            <p>7 ans • Primaire</p>
-
-                        </div>
-
-                    </div>
-
-                    <div class="child-actions">
-
-                        <a href="${pageContext.request.contextPath}/child-profile"
-                           class="btn btn-success">
-
-                            Voir le profil
-
-                        </a>
-
-                        <button class="btn btn-light">
-
-                            <i class="bi bi-pencil"></i>
-
-                        </button>
-
-                        <button class="btn btn-light">
-
-                            <i class="bi bi-three-dots-vertical"></i>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
 
         </div>
 
     </div>
+    <%} %>
 
+
+   
     <!-- RECOMMANDATIONS -->
 
     <div class="section-card mt-4">

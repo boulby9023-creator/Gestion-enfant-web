@@ -65,5 +65,7 @@ public class ConnexionDB {
 			System.err.println("Erreur lors de la fermeture : " + e.getMessage());
 		}
 	}
+	
+	
 
 }

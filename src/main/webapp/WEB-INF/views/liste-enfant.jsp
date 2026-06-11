@@ -1,5 +1,7 @@
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-
+<%    List<com.denkolochi.model.Enfant> enfants = (List<com.denkolochi.model.Enfant>) request.getAttribute("enfants");
+ %>
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -62,10 +64,13 @@
 								class="bi bi-gear"></i> Paramètres
 						</a></li>
 
-						<li class="nav-item mt-5"><a href="#"
-							class="nav-link text-danger"> <i
-								class="bi bi-box-arrow-right"></i> Déconnexion
-						</a></li>
+						<li class="nav-item mt-5"><a href="<%=request.getContextPath()%>/deconnexion">
+
+            <i class="bi bi-box-arrow-right"></i>
+
+            Déconnexion
+
+        </a></li>
 
 					</ul>
 
@@ -86,13 +91,7 @@
 							enfants</p>
 					</div>
 
-					<div class="parent-box">
-
-						<img
-							src="${pageContext.request.contextPath}/assets/images/image10.png"
-							alt="Parent"> <span>Parent A</span>
-
-					</div>
+					
 
 				</div>
 
@@ -104,7 +103,7 @@
 
 							<i class="bi bi-people-fill"></i>
 
-							<h3>2</h3>
+							<h3>${nbEnfants}</h3>
 
 							<p>Enfants suivis</p>
 
@@ -118,7 +117,7 @@
 
 							<i class="bi bi-clipboard-check-fill"></i>
 
-							<h3>24</h3>
+							<h3>${nb_quiz_realises}</h3>
 
 							<p>Activités réalisées</p>
 
@@ -156,7 +155,8 @@
 
 				</div>
 
-				<!-- LISTE DES ENFANTS -->
+		
+    
 				<div class="mt-5">
 
 					<div class="d-flex justify-content-between align-items-center mb-4">
@@ -167,15 +167,30 @@
 								consulter son suivi.</p>
 						</div>
 
-						<a href="#" class="btn btn-success"> <i
+						<a href="${pageContext.request.contextPath}/ajouterEnfant" class="btn btn-success"> <i
 							class="bi bi-plus-circle me-2"></i> Ajouter un enfant
 						</a>
 
 					</div>
+					
+		 <% if(enfants == null | enfants.isEmpty())  {%>
+					   <div class="section-card mt-4 d-flex justify-content-center fs-2">
+					   Vous n'avez pas encore ajouter d'enfants 
+					    
+					    </div>
+    
+    <% }   else {%> 
 
 					<div class="row g-4">
 
 						<!-- ENFANT 1 -->
+						
+						    <%
+    if (enfants != null) {
+    	int count = 0;
+        for (com.denkolochi.model.Enfant e : enfants) {
+        	 if (count >= 2) break;
+%>
 						<div class="col-lg-6">
 
 							<div class="card shadow-sm border-0 child-card">
@@ -189,9 +204,8 @@
 											class="rounded-circle me-3" width="70" height="70">
 
 										<div>
-											<h5 class="fw-bold mb-1">Awa Traoré</h5>
-											<span class="text-muted"> 5 ans • 4ème • École Les
-												Flamboyants </span>
+											<h5 class="fw-bold mb-1"><%= e.getPrenom() %> <%= e.getNom() %></h5>
+											<span class="text-muted"> <%= e.getDate_naissance() %> • <%= e.getSexe() %> </span>
 										</div>
 
 									</div>
@@ -199,7 +213,7 @@
 									<div class="d-flex gap-2 flex-wrap">
 
 										<a
-											href="${pageContext.request.contextPath}/child-profile?childId=1"
+											href="<%=request.getContextPath()%>/child-profile?id=<%= e.getId() %>"
 											class="btn btn-success"> <i class="bi bi-eye"></i>
 											Consulter
 										</a>
@@ -208,9 +222,9 @@
 											<i class="bi bi-pencil-square"></i> Modifier
 										</button>
 
-										<button class="btn btn-danger">
+										<a href="<%=request.getContextPath()%>/delete?id=<%= e.getId() %>" class="btn btn-danger ">
 											<i class="bi bi-trash"></i> Supprimer
-										</button>
+										</a>
 
 									</div>
 
@@ -220,53 +234,18 @@
 
 						</div>
 
-						<!-- ENFANT 2 -->
-						<div class="col-lg-6">
-
-							<div class="card shadow-sm border-0 child-card">
-
-								<div class="card-body">
-
-									<div class="d-flex align-items-center mb-3">
-
-										<img
-											src="${pageContext.request.contextPath}/assets/images/enfant2.png"
-											class="rounded-circle me-3" width="70" height="70">
-
-										<div>
-											<h5 class="fw-bold mb-1">Amadou Traoré</h5>
-											<span class="text-muted"> 7 ans • CE1 • École Les
-												Flamboyants </span>
-										</div>
-
-									</div>
-
-									<div class="d-flex gap-2 flex-wrap">
-
-										<a
-											href="${pageContext.request.contextPath}/child-profile?childId=2"
-											class="btn btn-success"> <i class="bi bi-eye"></i>
-											Consulter
-										</a>
-
-										<button class="btn btn-warning text-white">
-											<i class="bi bi-pencil-square"></i> Modifier
-										</button>
-
-										<button class="btn btn-danger">
-											<i class="bi bi-trash"></i> Supprimer
-										</button>
-
-									</div>
-
-								</div>
-
-							</div>
-
-						</div>
+						<%
+ count++;
+        }
+    }
+%>      
+   
+      
 
 					</div>
 
+				<%} %>
+				
 				</div>
 
 

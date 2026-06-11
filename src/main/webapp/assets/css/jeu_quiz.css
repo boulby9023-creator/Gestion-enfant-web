@@ -166,24 +166,27 @@ main{
 
 }
 .main-droite .list-question{
-    height: 50vh;
+    height: 300px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    /* overflow-y: auto; */
+    overflow-y: scroll;
     /* border: solid 1px black; */
     scroll-behavior: smooth;
 white-space: nowrap;
 }
  
 .main-droite .list-question .question{
-    height: 6vh;
+    height: 40px;
     width: 100%;
-    display: flex;
+    padding : 10px;
+    margin : 2px;
+    text-align : center;
+    /*display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;*/
     background-color: var(--vert-leger);
     border-radius: 5px;
 }
@@ -198,4 +201,10 @@ white-space: nowrap;
 }
 #no-answer{
     background-color: var(--gris);
+}
+
+.q-item.active {
+    background-color: #1E88E5;
+    color: white;
+    font-weight: bold;
 }
