@@ -1,15 +1,18 @@
 package com.denkolochi.model;
 
+import java.util.List;
+
 import com.denkolochi.enumeration.RoleEnum;
 
 public class Parent extends Utilisateur {
 	private int id_parent;
 	private String genre;
+    private List<Enfant> enfants;
 
-	public Parent(String genre, int id_parent) {
-		this.genre = genre;
-		this.id_parent = id_parent;
-	}
+//	public Parent(String genre, int id_parent) {
+//		this.genre = genre;
+//		this.id_parent = id_parent;
+//	}
 
 	public Parent(String genre, int id_parent, int id, String nom, String prenom, String tel, String mail,
 			String motDePasse, RoleEnum role) {
@@ -76,4 +79,7 @@ public class Parent extends Utilisateur {
 	public void setId_parent(int id_parent) {
 		this.id_parent = id_parent;
 	}
+	
+	 public List<Enfant> getEnfants() { return enfants; }
+	    public void setEnfants(List<Enfant> enfants) { this.enfants = enfants; }
 }

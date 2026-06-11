@@ -117,4 +117,46 @@ public class ImplUtilisateurDao implements Repository<Utilisateur, Integer> {
         u.setRole(RoleEnum.valueOf(rs.getString("roles").toUpperCase()));
         return u;
     }
+    
+    public boolean emailExiste(String mail) {
+        String sql = "SELECT COUNT(*) FROM utilisateurs WHERE mail = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, mail);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    
+    public boolean telephoneExiste(String tel) {
+        String sql = "SELECT COUNT(*) FROM utilisateurs WHERE tel = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, tel);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

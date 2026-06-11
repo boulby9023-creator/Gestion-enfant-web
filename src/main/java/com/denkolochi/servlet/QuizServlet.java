@@ -16,97 +16,112 @@ import java.util.List;
 import com.denkolochi.model.Quiz;
 import com.denkolochi.dao.ImplQuestionDAO;
 import com.denkolochi.dao.QuizDao;
+import com.denkolochi.model.Option;
 import com.denkolochi.model.Question;
 
 @WebServlet("/QuizServlet")
 public class QuizServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        
-        if (session.getAttribute("quiz") == null || "restart".equals(request.getParameter("action"))) {
-            Quiz quiz = chargerQuizDepuisDonnees();
-            
-            session.setAttribute("quiz", quiz);
-            session.setAttribute("currentIndex", 0);
-            session.setAttribute("score", 0);
-            
-            List<Integer> reponses = new ArrayList<>();
-            for (int i = 0; i < quiz.getQuestions().size(); i++) {
-                reponses.add(-1); 
-            }
-            session.setAttribute("reponsesUtilisateur", reponses);
-        }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-        this.getServletContext().getRequestDispatcher("/jeu_quiz.jsp").forward(request, response);
+    	  HttpSession session = request.getSession();
+          String action = request.getParameter("action");
+          String idQuizParam = request.getParameter("id_quiz");
+
+          if ("restart".equals(action) || session.getAttribute("quiz") == null) {
+              int idQuiz = Integer.parseInt(idQuizParam != null ? idQuizParam : "1"); // ou gérer l'erreur
+              Quiz quiz = chargerQuizComplet(idQuiz);
+//              if (quiz == null) {
+//                  response.sendRedirect(request.getContextPath() + "/dashboard");
+//                  return;
+//              }
+
+              session.setAttribute("quiz", quiz);
+              session.setAttribute("currentIndex", 0);
+              session.setAttribute("score", 0);
+              session.setAttribute("reponsesUtilisateur", initialiserReponses(quiz.getQuestions().size()));
+          }
+
+          request.getRequestDispatcher("/WEB-INF/views/jeu_quiz.jsp").forward(request, response);
+      }
+
+      protected void doPost(HttpServletRequest request, HttpServletResponse response)
+              throws ServletException, IOException {
+
+          HttpSession session = request.getSession();
+          Quiz quiz = (Quiz) session.getAttribute("quiz");
+          Integer currentIndex = (Integer) session.getAttribute("currentIndex");
+          List<Integer> reponsesUtilisateur = (List<Integer>) session.getAttribute("reponsesUtilisateur");
+
+          if (quiz == null || currentIndex == null) {
+              response.sendRedirect(request.getContextPath() + "/QuizServlet");
+              return;
+          }
+
+          // 1. Enregistrer la réponse si présente
+          String reponseStr = request.getParameter("reponse");
+          if (reponseStr != null) {
+              int choix = Integer.parseInt(reponseStr);
+              reponsesUtilisateur.set(currentIndex, choix);
+          }
+
+          // 2. Navigation
+          String nav = request.getParameter("nav");
+          int total = quiz.getQuestions().size();
+
+          if ("suivant".equals(nav) && currentIndex < total - 1) {
+              currentIndex++;
+          } else if ("precedent".equals(nav) && currentIndex > 0) {
+              currentIndex--;
+          } else if ("terminer".equals(nav)) {
+              // Calcul final du score
+              int scoreFinal = calculerScoreFinal(quiz, reponsesUtilisateur);
+              session.setAttribute("score", scoreFinal);
+              session.setAttribute("quizTermine", true);
+              response.sendRedirect(request.getContextPath() + "/ResultatQuizServlet"); // ou même page avec résultat
+              return;
+          }
+
+          session.setAttribute("currentIndex", currentIndex);
+          session.setAttribute("reponsesUtilisateur", reponsesUtilisateur);
+
+          response.sendRedirect(request.getContextPath() + "/QuizServlet");
+      }
+
+      private int calculerScoreFinal(Quiz quiz, List<Integer> reponses) {
+          int score = 0;
+          List<Question> questions = quiz.getQuestions();
+
+          for (int i = 0; i < questions.size(); i++) {
+              int indexReponse = reponses.get(i);
+              if (indexReponse != -1) {
+                  Option option = questions.get(i).getOptions().get(indexReponse);
+                  if (option.isEstCorrecte()) {
+                      // Tu peux mettre un score par question ou par capacité
+                      score += 10; // ou questions.get(i).getPoints() si tu ajoutes la colonne
+                  }
+              }
+          }
+          return score;
+      }
+
+      private List<Integer> initialiserReponses(int size) {
+          List<Integer> list = new ArrayList<>();
+          for (int i = 0; i < size; i++) list.add(-1);
+          return list;
+      }
+
+      private Quiz chargerQuizComplet(int idQuiz) {
+          QuizDao quizDao = new QuizDao();
+          ImplQuestionDAO questionDao = new ImplQuestionDAO();
+
+          Quiz quiz = quizDao.findById(idQuiz);
+          if (quiz != null) {
+              quiz.setQuestions(questionDao.recuperationQuestionsByIdQuiz(idQuiz));
+          }
+          return quiz;
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Quiz quiz = (Quiz) session.getAttribute("quiz");
-        int currentIndex = (int) session.getAttribute("currentIndex");
-        List<Integer> reponses = (List<Integer>) session.getAttribute("reponsesUtilisateur");
-
-        if (quiz == null) {
-            response.sendRedirect(request.getContextPath() + "/QuizServlet");
-            return;
-        }
-
-        String reponseChoisie = request.getParameter("reponse");
-        if (reponseChoisie != null) {
-            reponses.set(currentIndex, Integer.parseInt(reponseChoisie));
-        }
-
-        String action = request.getParameter("nav");
-        if ("suivant".equals(action) && currentIndex < quiz.getQuestions().size() - 1) {
-            currentIndex++;
-        } else if ("precedent".equals(action) && currentIndex > 0) {
-            currentIndex--;
-        }
-
-        int scoreActuel = 0;
-        List<Question> listeQuestions = quiz.getQuestions();
-        for (int i = 0; i < listeQuestions.size(); i++) {
-        	
-            if (reponses.get(i) == 1) { 
-                scoreActuel += listeQuestions.get(i).getScore();
-            }
-        }
-        
-       
-        int scorePourcentage = (quiz.getScoreMax() > 0) ? (scoreActuel * 100) / quiz.getScoreMax() : 0;
-
-        
-        session.setAttribute("currentIndex", currentIndex);
-        session.setAttribute("reponsesUtilisateur", reponses);
-        session.setAttribute("score", scorePourcentage);
-
-        response.sendRedirect(request.getContextPath() + "/QuizServlet");
-    }
-
-    
-    private Quiz chargerQuizDepuisDonnees() {
-    	QuizDao quizDao = new QuizDao();
-    	ImplQuestionDAO questionDao = new ImplQuestionDAO();
-        Quiz quiz = quizDao.findById(2);
-        
-        List<Question> liste = questionDao.recuperationQuestionsByIdQuiz(2);
-        
-        
-        quiz.setQuestions(liste);
-        return quiz;
-    }
-   /* private Quiz chargerQuizDepuisDonnees() {
-        Quiz quiz = new Quiz(1, 1200, 100, 10, "Mortal Kombat Lore", "Quiz sur l'histoire de MK", 12, 99, null, 1, null);
-        
-        List<Question> liste = new ArrayList<>();
-        liste.add(new Question("Qui est réellement Noob Saibot sous son masque d'ombre ?", 101, 30, 20, 1));
-        liste.add(new Question("Quel studio développe la franchise Mortal Kombat ?", 102, 30, 20, 1));
-        liste.add(new Question("Quel personnage possède un chapeau tranchant ?", 103, 30, 20, 1));
-        liste.add(new Question("Dans quel royaume se déroule le tournoi principal ?", 104, 30, 40, 1));
-        
-        quiz.setQuestions(liste);
-        return quiz;
-    }*/
 }

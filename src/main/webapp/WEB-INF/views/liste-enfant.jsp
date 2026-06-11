@@ -1,6 +1,7 @@
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-
+<%    List<com.denkolochi.model.Enfant> enfants = (List<com.denkolochi.model.Enfant>) request.getAttribute("enfants");
+ %>
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -63,10 +64,13 @@
 								class="bi bi-gear"></i> Paramètres
 						</a></li>
 
-						<li class="nav-item mt-5"><a href="#"
-							class="nav-link text-danger"> <i
-								class="bi bi-box-arrow-right"></i> Déconnexion
-						</a></li>
+						<li class="nav-item mt-5"><a href="<%=request.getContextPath()%>/deconnexion">
+
+            <i class="bi bi-box-arrow-right"></i>
+
+            Déconnexion
+
+        </a></li>
 
 					</ul>
 
@@ -87,13 +91,7 @@
 							enfants</p>
 					</div>
 
-					<div class="parent-box">
-
-						<img
-							src="${pageContext.request.contextPath}/assets/images/image10.png"
-							alt="Parent"> <span>Parent A</span>
-
-					</div>
+					
 
 				</div>
 
@@ -157,7 +155,8 @@
 
 				</div>
 
-				<!-- LISTE DES ENFANTS -->
+		
+    
 				<div class="mt-5">
 
 					<div class="d-flex justify-content-between align-items-center mb-4">
@@ -168,18 +167,25 @@
 								consulter son suivi.</p>
 						</div>
 
-						<a href="#" class="btn btn-success"> <i
+						<a href="${pageContext.request.contextPath}/ajouterEnfant" class="btn btn-success"> <i
 							class="bi bi-plus-circle me-2"></i> Ajouter un enfant
 						</a>
 
 					</div>
+					
+		 <% if(enfants == null | enfants.isEmpty())  {%>
+					   <div class="section-card mt-4 d-flex justify-content-center fs-2">
+					   Vous n'avez pas encore ajouter d'enfants 
+					    
+					    </div>
+    
+    <% }   else {%> 
 
 					<div class="row g-4">
 
 						<!-- ENFANT 1 -->
 						
 						    <%
-    List<com.denkolochi.model.Enfant> enfants = (List<com.denkolochi.model.Enfant>) request.getAttribute("enfants");
     if (enfants != null) {
     	int count = 0;
         for (com.denkolochi.model.Enfant e : enfants) {
@@ -216,9 +222,9 @@
 											<i class="bi bi-pencil-square"></i> Modifier
 										</button>
 
-										<button class="btn btn-danger">
+										<a href="<%=request.getContextPath()%>/delete?id=<%= e.getId() %>" class="btn btn-danger ">
 											<i class="bi bi-trash"></i> Supprimer
-										</button>
+										</a>
 
 									</div>
 
@@ -238,6 +244,8 @@
 
 					</div>
 
+				<%} %>
+				
 				</div>
 
 

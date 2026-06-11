@@ -287,7 +287,7 @@ textarea{
  }
 
  .annuler{
-    width: 180px;
+    width: 230px;
     padding: 10px 20px;
     border: 2px solid #2E9E3E;
     border-radius: 12px;
@@ -466,3 +466,15 @@ textarea{
         font-size: 20px;
     }
 }
+
+
+.message{
+    margin: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    font-weight: bold;
+}
+

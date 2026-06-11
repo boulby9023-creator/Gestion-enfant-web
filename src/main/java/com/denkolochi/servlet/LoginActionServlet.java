@@ -15,6 +15,12 @@ import com.denkolochi.model.Utilisateur;
 public class LoginActionServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ImplUtilisateurDao utilisateurDao = new ImplUtilisateurDao();
+    
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("WEB-INF/views/connexion.jsp").forward(request, response);
+	}
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
@@ -26,7 +32,7 @@ public class LoginActionServlet extends HttpServlet {
             Utilisateur user = utilisateurDao.findByMail(mail);
             HttpSession session = request.getSession();
             session.setAttribute("utilisateurConnecte", user);
-            response.sendRedirect("/WEB-INF/views/dashboard.jsp"); 
+            response.sendRedirect("dashboard"); 
         } else {
             request.setAttribute("erreur", "Email ou mot de passe incorrect.");
             request.getRequestDispatcher("/WEB-INF/views/connexion.jsp").forward(request, response);

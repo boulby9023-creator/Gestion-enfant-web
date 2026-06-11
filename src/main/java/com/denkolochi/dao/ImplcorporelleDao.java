@@ -2,10 +2,13 @@ package com.denkolochi.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import com.denkolochi.configuration.ConnexionDB;
 import com.denkolochi.model.Corporelle;
+import com.denkolochi.model.Question;
 
 public class ImplcorporelleDao implements Repository<Corporelle, Integer> {
 	Connection con = ConnexionDB.getInstance().getconnection();
@@ -13,32 +16,32 @@ public class ImplcorporelleDao implements Repository<Corporelle, Integer> {
 
 
     @Override
-    public void save( Corporelle entity) {
- 
+    public void save(Corporelle entity) {
+        String sql = "INSERT INTO corporelles (id_enfant, poids, taille, imc, date_enregistrement) "
+                   + "VALUES (?, ?, ?, ?, ?)";
 
-		String sql = "INSERT INTO corporelles VALUES (?,?,?,?,?,?)";
-		try (PreparedStatement pont = con.prepareStatement(sql)) {
-			pont.setNull(1, java.sql.Types.INTEGER);
-			pont.setInt(2, entity.getId_enfant());
-			pont.setDouble(3, entity.getPoids());
-			pont.setDouble(4, entity.getTaille());
-			pont.setDouble(5, entity.getImc());
-			pont.setDate(6,
-					entity.getDate_mesure() != null ? new java.sql.Date(entity.getDate_mesure().getTime()) : null);
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setInt(1, entity.getId_enfant());
+            ps.setDouble(2, entity.getPoids());
+            ps.setDouble(3, entity.getTaille());
+            ps.setDouble(4, entity.getImc());
+            ps.setDate(5, entity.getDate_mesure() != null 
+                            ? new java.sql.Date(entity.getDate_mesure().getTime()) 
+                            : new java.sql.Date(System.currentTimeMillis()));
 
-			int b = pont.executeUpdate();
-			if (b > 0) {
-				System.out.println("Capacite corporelle inserer avec succès");
-			}
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                System.out.println("✅ Mesure corporelle insérée avec succès");
+            }
 
-			con.close();
-
-		} catch (SQLException e) {
-			System.err.println("Problème d'insertion de corporelle");
-			System.err.println("Erreur sql: " + e.getSQLState());
-			System.err.println("Erreur message: " + e.getMessage());
-		}
-	}
+        } catch (SQLException e) {
+            System.err.println("❌ Erreur lors de l'insertion des mesures corporelles");
+            System.err.println("SQL State : " + e.getSQLState());
+            System.err.println("Message   : " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
 	@Override
 	public Corporelle findById(Integer id) {
@@ -48,8 +51,9 @@ public class ImplcorporelleDao implements Repository<Corporelle, Integer> {
 
 	@Override
 	public List<Corporelle> findAll() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+		throw new UnsupportedOperationException("Unimplemented method 'findById'");
+
+	
 	}
 
 	@Override
@@ -62,5 +66,32 @@ public class ImplcorporelleDao implements Repository<Corporelle, Integer> {
 	public void update(Integer id, Corporelle entity) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
+	
+	public List<Corporelle> findAllByEnfant(Integer id) {
+	    List<Corporelle> corporelles = new ArrayList<>();
+	    String sql = "SELECT * FROM corporelles WHERE id_enfant = ? ORDER BY date_enregistrement DESC, id DESC";
+
+	    try (PreparedStatement pont = con.prepareStatement(sql)) {
+	        pont.setInt(1, id);
+
+	        try (ResultSet rs = pont.executeQuery()) {
+	            while (rs.next()) {
+	                Corporelle corporelle = new Corporelle();
+	                corporelle.setId(rs.getInt("id"));
+	                corporelle.setId_enfant(rs.getInt("id_enfant"));
+	                corporelle.setPoids(rs.getFloat("poids"));
+	                corporelle.setTaille(rs.getFloat("taille"));
+	                corporelle.setImc(rs.getFloat("imc"));
+	                corporelle.setDate_mesure(rs.getDate("date_enregistrement"));
+	                corporelles.add(corporelle);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return corporelles;
+	}
+	
 
 }

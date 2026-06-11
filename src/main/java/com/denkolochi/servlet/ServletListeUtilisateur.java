@@ -3,8 +3,8 @@ package com.denkolochi.servlet;
 import java.io.IOException;
 import java.util.List;
 
-import com.denkolochi.dao.ImplParentDAO;
-import com.denkolochi.model.Parent;
+import com.denkolochi.dao.ImplUtilisateurDao;
+import com.denkolochi.model.Utilisateur;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,6 +16,9 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ServletListeUtilisateur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	ImplUtilisateurDao util = new ImplUtilisateurDao();
+	Utilisateur us = new Utilisateur();
+	
 	//private ImplParentDAO parentDAO = new ImplParentDAO();
        
     public ServletListeUtilisateur() {
@@ -25,14 +28,8 @@ public class ServletListeUtilisateur extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 1. On charge les données au moment du clic utilisateur
-		//List<Parent> liste = parentDAO.findAll();
-		
-		// 2. On envoie l'attribut AVANT le forward. 
-		// "parent" correspond exactement à ta boucle 'for(Parent pa : parent)'
-		//request.setAttribute("parent", liste);
-		
-		// 3. Enfin, on affiche la page JSP
+		List<Utilisateur> users = util.findAll();
+		request.setAttribute("users", users);
 		request.getRequestDispatcher("/WEB-INF/views/Dashboard/listeUtilisateurs.jsp").forward(request, response);
 	}
 

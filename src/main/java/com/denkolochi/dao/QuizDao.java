@@ -47,6 +47,7 @@ public class QuizDao implements Repository<Quiz,Integer> {
 					quiz.setTitre(rs.getString("titre"));
 					quiz.setTempsLimitGlobal(rs.getInt("temps_limite"));
 					quiz.setScoreMax(rs.getInt("score_max"));
+					
 					return quiz;
 				} else {
 					System.out.println("Aucun quiz trouvé avec l'id " + id);

@@ -125,7 +125,7 @@ public class ImplEnfantDAO implements Repository<Enfant, Integer> {
 		return enfants;
 	}
 
-	public Enfant saveEnfant(Enfant entity) {
+	public boolean  saveEnfant(Enfant entity) {
 		try {
 
 			String sql = "INSERT INTO enfants (nom, prenom, date_naissance, sexe, id_parent) VALUES (?, ?, ?, ?, ?)";
@@ -151,7 +151,7 @@ public class ImplEnfantDAO implements Repository<Enfant, Integer> {
 				}
 
 				System.out.println("Enfant ajouté avec succès !");
-				return entity;
+				return true;
 			}
 
 		} catch (SQLException e) {
@@ -160,15 +160,37 @@ public class ImplEnfantDAO implements Repository<Enfant, Integer> {
 			System.err.println("Erreur message: " + e.getMessage());
 		}
 
-		return null;
+		return false;
 	}
-
 
 
 
 	@Override
 	public Enfant findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	    Enfant enfant = null;
+
+	    try {
+	        String sql = "SELECT * FROM enfants WHERE id_enfants = ?";
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ps.setInt(1, id);
+
+	        ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            enfant = new Enfant();
+	            enfant.setId(rs.getInt("id_enfants"));
+	            enfant.setNom(rs.getString("nom"));
+	            enfant.setPrenom(rs.getString("prenom"));
+	            enfant.setDate_naissance(rs.getDate("date_naissance").toLocalDate());
+	            enfant.setSexe(rs.getString("sexe"));
+	            enfant.setParent(rs.getInt("id_parent"));
+	        }
+
+	    } catch (SQLException e) {
+	        System.err.println("Erreur findById : " + e.getMessage());
+	    }
+
+	    return enfant;
 	}
+
 }
