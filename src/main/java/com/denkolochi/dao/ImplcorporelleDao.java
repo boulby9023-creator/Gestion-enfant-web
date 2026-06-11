@@ -69,7 +69,7 @@ public class ImplcorporelleDao implements Repository<Corporelle, Integer> {
 	
 	public List<Corporelle> findAllByEnfant(Integer id) {
 	    List<Corporelle> corporelles = new ArrayList<>();
-	    String sql = "SELECT * FROM corporelles WHERE id_enfant = ?";
+	    String sql = "SELECT * FROM corporelles WHERE id_enfant = ? ORDER BY date_enregistrement DESC, id DESC";
 
 	    try (PreparedStatement pont = con.prepareStatement(sql)) {
 	        pont.setInt(1, id);
