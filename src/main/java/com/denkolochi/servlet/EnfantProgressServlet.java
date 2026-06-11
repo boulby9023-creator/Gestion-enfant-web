@@ -1,14 +1,5 @@
 package com.denkolochi.servlet;
 
-import java.io.IOException;
-
-import com.denkolochi.dao.ImplEnfantDAO;
-import com.denkolochi.dao.ImplParentDAO;
-import com.denkolochi.dao.ImplReponseEnfantDAO;
-import com.denkolochi.model.Enfant;
-import com.denkolochi.model.Parent;
-import com.denkolochi.model.Utilisateur;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,17 +7,27 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/child-profile")
-public class ChildProfileServlet extends HttpServlet {
+import java.io.IOException;
 
-    private static final long serialVersionUID = 1L;
+import com.denkolochi.dao.ImplEnfantDAO;
+import com.denkolochi.dao.ImplReponseEnfantDAO;
+import com.denkolochi.model.Enfant;
+import com.denkolochi.model.Utilisateur;
 
-    @Override
-    protected void doGet(HttpServletRequest request,
-                         HttpServletResponse response)
-            throws ServletException, IOException {
-    	
-    	HttpSession session = request.getSession();
+/**
+ * Servlet implementation class EnfantProgressServlet
+ */
+@WebServlet("/enfant-progress")
+public class EnfantProgressServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	HttpSession session = request.getSession();
     	
     	String idStr = request.getParameter("id");
     	int idEnfant = Integer.parseInt(idStr);
@@ -52,13 +53,21 @@ public class ChildProfileServlet extends HttpServlet {
         	}
 
            
-           request.setAttribute("enfant", enfant);   
-           request.setAttribute("idEnfant", idEnfant);  
+           request.setAttribute("enfant", enfant);          
           
     	
-
-        request.getRequestDispatcher(
-                "/WEB-INF/views/child-profile.jsp")
+		
+		request.getRequestDispatcher(
+                "/WEB-INF/views/enfant-progress.jsp")
                 .forward(request, response);
-    }
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
 }
