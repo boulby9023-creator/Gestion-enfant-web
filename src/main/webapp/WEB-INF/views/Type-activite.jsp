@@ -147,35 +147,7 @@
         </a>
     </div>
 
-    <div class="col-12 col-md-6">
-        <a href="${pageContext.request.contextPath}/exercice?type=${type}&id=${enfant.id}" class="text-decoration-none">
-            <div class="card h-100 shadow-sm border-info border-2 text-center">
-                <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 160px;">
-                    <h2 class="mb-0 text-dark fw-bold">Exercice</h2>
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-12 col-md-6">
-        <a href="${pageContext.request.contextPath}/jeux?type=${type}&id=${enfant.id}" class="text-decoration-none">
-            <div class="card h-100 shadow-sm border-warning border-2 text-center">
-                <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 160px;">
-                    <h2 class="mb-0 text-dark fw-bold">Jeux</h2>
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-12 col-md-6">
-        <a href="${pageContext.request.contextPath}/autre-activite?type=${type}&id=${enfant.id}"  class="text-decoration-none">
-            <div class="card h-100 shadow-sm border-danger border-2 text-center">
-                <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 160px;">
-                    <h2 class="mb-0 text-dark fw-bold">Autre</h2>
-                </div>
-            </div>
-        </a>
-    </div>
+   
 
 </div>
 

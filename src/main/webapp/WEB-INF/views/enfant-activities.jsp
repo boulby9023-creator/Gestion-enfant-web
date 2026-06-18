@@ -167,7 +167,7 @@
                         Des activités adaptées pour le développement  intellectuel de votre enfant
                     </p>
                 </div>
-                <a href="${pageContext.request.contextPath}/Type-activite?type=Intellectuel&idEnfant${enfant.id}"
+                <a href="${pageContext.request.contextPath}/Type-activite?type=Intellectuel&idEnfant=${enfant.id}"
                    class="stretched-link"></a>
             </div>
         </div>
