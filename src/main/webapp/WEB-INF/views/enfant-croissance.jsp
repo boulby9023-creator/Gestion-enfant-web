@@ -172,6 +172,7 @@
 		                            <td><%= c.getTaille() %></td>
 		                            <td><%= c.getImc() %></td>
 		                            <td><%= c.getDate_mesure() %></td>
+		                            
 		                        </tr>
 		                        <%
 		                                }

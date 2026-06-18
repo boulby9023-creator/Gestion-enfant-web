@@ -171,33 +171,6 @@
 
         </div>
 
-        <div class="col-lg-3">
-
-            <div class="kpi-card">
-
-                <i class="bi bi-bar-chart-fill"></i>
-
-                <h3>85%</h3>
-
-                <p>Moyenne globale</p>
-
-            </div>
-
-        </div>
-
-        <div class="col-lg-3">
-
-            <div class="kpi-card">
-
-                <i class="bi bi-award-fill"></i>
-
-                <h3>12</h3>
-
-                <p>Objectifs atteints</p>
-
-            </div>
-
-        </div>
 
     </div>
 

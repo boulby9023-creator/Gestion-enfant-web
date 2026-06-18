@@ -179,19 +179,6 @@
 
 					
 
-					<div class="col-lg-3">
-
-						<div class="score-card red">
-
-							<h6>Émotionnel</h6>
-
-							<h2>90%</h2>
-
-							<span>Excellent</span>
-
-						</div>
-
-					</div>
 
 				</div>
 

@@ -79,6 +79,8 @@ public class ChildProfileServlet extends HttpServlet {
            String appreciation = CalculDeveloppementCorporelleEnfant.interpreterScore(score);
            String categorie = CalculDeveloppementCorporelleEnfant.getCategorie(score);
            
+           System.out.print(score);
+           
           
 
 
