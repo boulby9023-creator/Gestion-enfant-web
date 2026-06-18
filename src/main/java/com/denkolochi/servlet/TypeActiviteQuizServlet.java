@@ -8,16 +8,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class TypeActiviteQuiz
+ * Servlet implementation class TypeActiviteQuizServlet
  */
-@WebServlet("Type-activite-quiz")
-public class TypeActiviteQuiz extends HttpServlet {
+@WebServlet("/Type-activite-quiz")
+public class TypeActiviteQuizServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TypeActiviteQuiz() {
+    public TypeActiviteQuizServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,10 +26,9 @@ public class TypeActiviteQuiz extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher(
-                "/WEB-INF/views/Type-activite-quiz")
-                .forward(request, response);
+		 request.getRequestDispatcher(
+	                "/WEB-INF/views/Type-activite-quiz.jsp")
+	                .forward(request, response);
 	}
 
 	/**

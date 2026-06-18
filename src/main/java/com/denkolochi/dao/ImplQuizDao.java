@@ -221,4 +221,5 @@ public class ImplQuizDao implements Repository<Quiz,Integer> {
 
 		return quizs;
 	}
+	
 }
