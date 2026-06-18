@@ -1,5 +1,6 @@
 package com.denkolochi.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Corporelle {
@@ -8,9 +9,9 @@ public class Corporelle {
 	private double poids;
 	private double taille;
 	private double imc;
-	private java.util.Date date_mesure;
+	private LocalDate date_mesure;
 
-	public Corporelle(int id, int id_enfant, double poids, double taille, double imc, Date date_mesure) {
+	public Corporelle(int id, int id_enfant, double poids, double taille, double imc, LocalDate date_mesure) {
 		this.id = id;
 		this.id_enfant = id_enfant;
 		this.poids = poids;
@@ -62,11 +63,11 @@ public class Corporelle {
 		this.imc = imc;
 	}
 
-	public java.util.Date getDate_mesure() {
+	public LocalDate getDate_mesure() {
 		return date_mesure;
 	}
 
-	public void setDate_mesure(java.util.Date date_mesure) {
+	public void setDate_mesure(LocalDate date_mesure) {
 		this.date_mesure = date_mesure;
 	}
 

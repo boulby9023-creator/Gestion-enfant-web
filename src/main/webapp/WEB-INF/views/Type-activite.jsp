@@ -124,138 +124,60 @@
 
 				<div class="profile-menu">
 
-					<a href="${pageContext.request.contextPath}/child-profile?id=${enfant.id}" class="active"> Vue d'ensemble </a> 
-					<a href="${pageContext.request.contextPath}/enfant-activities?id=${enfant.id}"> Activités </a>
+					<a href="${pageContext.request.contextPath}/child-profile?id=${enfant.id}" > Vue d'ensemble </a> 
+					<a href="${pageContext.request.contextPath}/enfant-activities?id=${enfant.id}" class="active"> Activités </a>
 					<a href="${pageContext.request.contextPath}/enfant-croissance?id=${enfant.id}"> Croissance </a>
 					<a href="${pageContext.request.contextPath}/enfant-progress?id=${enfant.id}"> Suivi & progrès </a> 
 					<a href="${pageContext.request.contextPath}/enfant-recommandations?id=${enfant.id}"> Recommandations </a>
-
 				</div>
 
-				<!-- STATISTIQUES -->
+				<!-- types activites  -->
 
-				<div class="row g-4 mt-2">
-				<div class="col-lg-3">
+				
+<!-- types activites -->
+<div class="row g-4 mt-3">
 
-						<div class="score-card blue">
+    <div class="col-12 col-md-6">
+        <a href="${pageContext.request.contextPath}/Type-activite-quiz?type=${type}&id=${enfant.id}" class="text-decoration-none">
+            <div class="card h-100 shadow-sm border-success border-2 text-center">
+                <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 160px;">
+                    <h2 class="mb-0 text-dark fw-bold">Quiz</h2>
+                </div>
+            </div>
+        </a>
+    </div>
 
-							<h6>Corporel</h6>
+    <div class="col-12 col-md-6">
+        <a href="${pageContext.request.contextPath}/exercice?type=${type}&id=${enfant.id}" class="text-decoration-none">
+            <div class="card h-100 shadow-sm border-info border-2 text-center">
+                <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 160px;">
+                    <h2 class="mb-0 text-dark fw-bold">Exercice</h2>
+                </div>
+            </div>
+        </a>
+    </div>
 
-							<h2>${score}%</h2>
+    <div class="col-12 col-md-6">
+        <a href="${pageContext.request.contextPath}/jeux?type=${type}&id=${enfant.id}" class="text-decoration-none">
+            <div class="card h-100 shadow-sm border-warning border-2 text-center">
+                <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 160px;">
+                    <h2 class="mb-0 text-dark fw-bold">Jeux</h2>
+                </div>
+            </div>
+        </a>
+    </div>
 
-							<span>${appreciation}</span>
+    <div class="col-12 col-md-6">
+        <a href="${pageContext.request.contextPath}/autre-activite?type=${type}&id=${enfant.id}"  class="text-decoration-none">
+            <div class="card h-100 shadow-sm border-danger border-2 text-center">
+                <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 160px;">
+                    <h2 class="mb-0 text-dark fw-bold">Autre</h2>
+                </div>
+            </div>
+        </a>
+    </div>
 
-						</div>
-
-					</div>
-
-					<div class="col-lg-3">
-
-						<div class="score-card green">
-
-							<h6>Cognitif</h6>
-
-							<h2>85%</h2>
-
-							<span>Excellent</span>
-
-						</div>
-
-					</div>
-
-					<div class="col-lg-3">
-
-						<div class="score-card orange">
-
-							<h6>Intellectuel</h6>
-
-							<h2>78%</h2>
-
-							<span>Bon</span>
-
-						</div>
-
-					</div>
-
-					
-
-					<div class="col-lg-3">
-
-						<div class="score-card red">
-
-							<h6>Émotionnel</h6>
-
-							<h2>90%</h2>
-
-							<span>Excellent</span>
-
-						</div>
-
-					</div>
-
-				</div>
-
-				<!-- ACTIVITES -->
-
-				<div class="card border-0 shadow-sm mt-4">
-
-					<div class="card-body">
-
-						<div class="d-flex justify-content-between mb-3">
-
-							<h5>Activités récentes</h5>
-
-							<a href="${pageContext.request.contextPath}/enfant-activities?id=${enfant.id}"> Voir tout </a>
-
-						</div>
-
-						<table class="table">
-
-							<thead>
-
-								<tr>
-
-									<th>Activité</th>
-									<th>Date</th>
-									<th>Score</th>
-
-								</tr>
-
-							</thead>
-
-							<tbody>
-
-								<tr>
-
-									<td>Quiz mémoire</td>
-									<td>20 Avril 2026</td>
-									<td><span class="badge bg-success"> 85% </span></td>
-
-								</tr>
-
-								<tr>
-
-									<td>Lecture guidée</td>
-									<td>18 Avril 2026</td>
-									<td><span class="badge bg-primary"> 90% </span></td>
-
-								</tr>
-
-								<tr>
-
-									<td>Logique</td>
-									<td>15 Avril 2026</td>
-									<td><span class="badge bg-warning"> 75% </span></td>
-
-								</tr>
-
-							</tbody>
-
-						</table>
-
-					</div>
-
-				</div>
+</div>
 
 				
 

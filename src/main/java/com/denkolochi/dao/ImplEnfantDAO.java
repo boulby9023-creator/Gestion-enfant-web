@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import com.denkolochi.configuration.ConnexionDB;
@@ -114,9 +115,20 @@ public class ImplEnfantDAO implements Repository<Enfant, Integer> {
 				en.setId(resultat.getInt("id_enfants"));
 				en.setNom(resultat.getString("nom"));
 				en.setPrenom(resultat.getString("prenom"));
-				en.setDate_naissance(LocalDate.parse(resultat.getDate("date_naissance").toString()));
 				en.setSexe(resultat.getString("sexe"));
-				en.setParent(resultat.getInt("id_parent")); // ✅ plus d'id_activite
+				en.setParent(resultat.getInt("id_parent")); 
+				
+				
+				 String dateStr = resultat.getString("date_naissance");
+	                if (dateStr != null) {
+	                	en.setDate_naissance(LocalDate.parse(resultat.getDate("date_naissance").toString()));
+	                    int ageEnMois = Period.between(en.getDate_naissance(), LocalDate.now())
+	                            .getYears() * 12 
+	                            + Period.between(en.getDate_naissance(), LocalDate.now())
+	                            .getMonths();
+	                    en.setAgeEnMois(ageEnMois);
+	                }
+	                
 				enfants.add(en);
 			}
 		} catch (SQLException e) {
@@ -181,9 +193,19 @@ public class ImplEnfantDAO implements Repository<Enfant, Integer> {
 	            enfant.setId(rs.getInt("id_enfants"));
 	            enfant.setNom(rs.getString("nom"));
 	            enfant.setPrenom(rs.getString("prenom"));
-	            enfant.setDate_naissance(rs.getDate("date_naissance").toLocalDate());
 	            enfant.setSexe(rs.getString("sexe"));
 	            enfant.setParent(rs.getInt("id_parent"));
+	            
+	            String dateStr = rs.getString("date_naissance");
+                if (dateStr != null) {
+                	enfant.setDate_naissance(LocalDate.parse(rs.getDate("date_naissance").toString()));
+                    int ageEnMois = Period.between(enfant.getDate_naissance(), LocalDate.now())
+                            .getYears() * 12 
+                            + Period.between(enfant.getDate_naissance(), LocalDate.now())
+                            .getMonths();
+                    enfant.setAgeEnMois(ageEnMois);
+                }
+
 	        }
 
 	    } catch (SQLException e) {

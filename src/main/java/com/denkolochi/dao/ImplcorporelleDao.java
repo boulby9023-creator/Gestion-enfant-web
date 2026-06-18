@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import com.denkolochi.configuration.ConnexionDB;
@@ -26,9 +27,11 @@ public class ImplcorporelleDao implements Repository<Corporelle, Integer> {
             ps.setDouble(2, entity.getPoids());
             ps.setDouble(3, entity.getTaille());
             ps.setDouble(4, entity.getImc());
-            ps.setDate(5, entity.getDate_mesure() != null 
-                            ? new java.sql.Date(entity.getDate_mesure().getTime()) 
-                            : new java.sql.Date(System.currentTimeMillis()));
+            java.sql.Date dateSQL = entity.getDate_mesure() != null 
+                    ? java.sql.Date.valueOf(entity.getDate_mesure()) 
+                    : java.sql.Date.valueOf(java.time.LocalDate.now());
+            
+            ps.setDate(5, dateSQL);
 
             int rows = ps.executeUpdate();
             if (rows > 0) {
@@ -82,7 +85,7 @@ public class ImplcorporelleDao implements Repository<Corporelle, Integer> {
 	                corporelle.setPoids(rs.getFloat("poids"));
 	                corporelle.setTaille(rs.getFloat("taille"));
 	                corporelle.setImc(rs.getFloat("imc"));
-	                corporelle.setDate_mesure(rs.getDate("date_enregistrement"));
+	                corporelle.setDate_mesure(LocalDate.parse(rs.getString("date_enregistrement")));
 	                corporelles.add(corporelle);
 	            }
 	        }
@@ -92,6 +95,60 @@ public class ImplcorporelleDao implements Repository<Corporelle, Integer> {
 
 	    return corporelles;
 	}
+	
+	  public List<Corporelle> getMesuresByEnfantId(int idEnfant) {
+	        List<Corporelle> mesures = new ArrayList<>();
+	        String sql = "SELECT * FROM corporelles WHERE id_enfant = ? ORDER BY date_enregistrement ASC";
+	        
+	        try {
+	            PreparedStatement stmt = con.prepareStatement(sql);
+	            stmt.setInt(1, idEnfant);
+	            ResultSet rs = stmt.executeQuery();
+	            
+	            while (rs.next()) {
+	            	Corporelle mesure = new Corporelle();
+	                mesure.setId(rs.getInt("id"));
+	                mesure.setId_enfant(rs.getInt("id_enfant"));
+	                mesure.setPoids(rs.getFloat("poids"));
+	                mesure.setTaille(rs.getFloat("taille"));
+	                mesure.setImc(rs.getFloat("imc"));
+	                mesure.setDate_mesure(LocalDate.parse(rs.getString("date_enregistrement")));;
+	                
+	                mesures.add(mesure);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        
+	        return mesures;
+	    }
+	  
+	  public Corporelle getLastMesure(int idEnfant) {
+	        String sql = "SELECT * FROM corporelles WHERE id_enfant = ? ORDER BY date_enregistrement DESC LIMIT 1";
+	        
+	        try {
+	            PreparedStatement stmt = con.prepareStatement(sql);
+	            stmt.setInt(1, idEnfant);
+	            ResultSet rs = stmt.executeQuery();
+	            
+	            if (rs.next()) {
+	            	Corporelle mesure = new Corporelle();
+	                mesure.setId(rs.getInt("id"));
+	                mesure.setId_enfant(rs.getInt("id_enfant"));
+	                mesure.setPoids(rs.getFloat("poids"));
+	                mesure.setTaille(rs.getFloat("taille"));
+	                mesure.setImc(rs.getFloat("imc"));
+	                mesure.setDate_mesure(LocalDate.parse(rs.getString("date_enregistrement")));
+	                
+	                return mesure;
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        
+	        return null;
+	    }
+	    
 	
 
 }

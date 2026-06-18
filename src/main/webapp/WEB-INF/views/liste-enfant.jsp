@@ -187,9 +187,7 @@
 						
 						    <%
     if (enfants != null) {
-    	int count = 0;
         for (com.denkolochi.model.Enfant e : enfants) {
-        	 if (count >= 2) break;
 %>
 						<div class="col-lg-6">
 
@@ -235,7 +233,6 @@
 						</div>
 
 						<%
- count++;
         }
     }
 %>      

@@ -10,6 +10,9 @@ public class Enfant {
 	private LocalDate date_naissance;
 	private String sexe;
 	private int id_parent;
+	
+    private int ageEnMois;
+
 
 	public Enfant(int id, String nom, String prenom, LocalDate date_naissance, String sexe, int id_parent) {
 		this.id = id;
@@ -70,6 +73,14 @@ public class Enfant {
 	public void setParent(int id_parent) {
 		this.id_parent = id_parent;
 
+	}
+
+	public int getAgeEnMois() {
+		return ageEnMois;
+	}
+
+	public void setAgeEnMois(int ageEnMois) {
+		this.ageEnMois = ageEnMois;
 	}
 
 }
