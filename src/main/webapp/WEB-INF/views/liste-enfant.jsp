@@ -127,31 +127,6 @@
 
 					<div class="col-lg-3">
 
-						<div class="kpi-card">
-
-							<i class="bi bi-bar-chart-fill"></i>
-
-							<h3>85%</h3>
-
-							<p>Moyenne globale</p>
-
-						</div>
-
-					</div>
-
-					<div class="col-lg-3">
-
-						<div class="kpi-card">
-
-							<i class="bi bi-award-fill"></i>
-
-							<h3>12</h3>
-
-							<p>Objectifs atteints</p>
-
-						</div>
-
-					</div>
 
 				</div>
 
@@ -216,9 +191,7 @@
 											Consulter
 										</a>
 
-										<button class="btn btn-warning text-white">
-											<i class="bi bi-pencil-square"></i> Modifier
-										</button>
+									
 
 										<a href="<%=request.getContextPath()%>/delete?id=<%= e.getId() %>" class="btn btn-danger ">
 											<i class="bi bi-trash"></i> Supprimer

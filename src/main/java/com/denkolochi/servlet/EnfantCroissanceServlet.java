@@ -56,11 +56,15 @@ public class EnfantCroissanceServlet extends HttpServlet {
            System.out.println(idEnfant);
            List<Corporelle> corporelles = corporelleDAO.findAllByEnfant(idEnfant);
            
+           
+
            if (corporelles != null) {
-        	    System.out.println("Corporelles récupérées : " + corporelles.size());
-        	} else {
-        	    System.out.println("Corporelles est null");
-        	}
+               System.out.println("✅ Corporelles récupérées : " + corporelles.size());
+
+               
+           } else {
+               System.out.println("❌ Corporelles est null");
+           }
 
            
            request.setAttribute("corporelles", corporelles);
